@@ -121,17 +121,110 @@
         button.secondary-btn:hover { text-decoration: underline; }
 
         /* Loading Screen */
-        #loading-screen { display: none; text-align: center; padding: 80px 20px; }
-        .spinner {
-            border: 3px solid #e5e5ea; width: 40px; height: 40px; border-radius: 50%;
-            border-left-color: var(--accent); animation: spin 1s linear infinite; margin: 0 auto;
+        #loading-screen { display: none; text-align: center; padding: 100px 20px; }
+        
+        .ai-glow {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #9b51e0, #4facfe);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite, pulseGlow 2s cubic-bezier(0.4, 0, 0.2, 1) infinite, shapeShift 4s ease-in-out infinite alternate;
+            box-shadow: 0 0 25px rgba(0, 113, 227, 0.4);
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #loading-text { transition: opacity 0.2s ease-in-out; font-weight: 500; font-size: 19px; }
 
-        /* Results / Apple Spec Style */
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 25px rgba(0, 113, 227, 0.4); } 50% { transform: scale(1.15); opacity: 0.85; box-shadow: 0 0 45px rgba(155, 81, 224, 0.6); } }
+        @keyframes shapeShift { 0% { border-radius: 50%; } 100% { border-radius: 40% 60% 60% 40% / 40% 50% 50% 60%; } }
+        #loading-text { transition: opacity 0.3s ease-in-out; font-weight: 500; font-size: 19px; }
+
+        /* Results Area */
         #results { display: none; width: 100%; max-width: 600px;}
-        .project-card { background: var(--card); border-radius: 20px; margin-bottom: 24px; padding: 24px; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.03); }
+        
+        /* --- THE CENTURION BLACK CARD UPGRADE --- */
+        .black-card {
+            background: linear-gradient(135deg, #212121 0%, #0d0d0d 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px; 
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+        }
+        
+        /* Metallic diagonal sheen */
+        .black-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 50%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; z-index: 1; position: relative;}
+        
+        .card-top-left {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* The Silver EMV Chip */
+        .card-chip {
+            width: 38px; height: 28px;
+            background: linear-gradient(135deg, #e5e5ea 0%, #86868b 100%);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .card-chip::after {
+            content:''; position:absolute; top: 11px; left:0; width:100%; height:1px; background: rgba(0,0,0,0.25);
+            box-shadow: 0 6px 0 rgba(0,0,0,0.25);
+        }
+        .card-chip::before {
+            content:''; position:absolute; top: 0; left:14px; width:1px; height:100%; background: rgba(0,0,0,0.25);
+            box-shadow: 10px 0 0 rgba(0,0,0,0.25);
+        }
+
+        .card-title { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #86868b; text-align: right; font-weight: 600;}
+
+        /* Laser-etched data styling */
+        .card-data-grid { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-bottom: 24px; z-index: 1; position: relative; }
+        .card-data-item { display: flex; flex-direction: column; }
+        .card-data-label { font-size: 9px; text-transform: uppercase; color: #86868b; letter-spacing: 1px; margin-bottom: 3px; }
+        .card-data-value { font-size: 12px; font-weight: 600; color: #d2d2d7; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .card-footer {
+            display: flex; justify-content: flex-end; align-items: flex-end; z-index: 1; position: relative;
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;
+        }
+
+        /* Embossed Name styling - Now 18px and positioned under the chip */
+        .card-name { font-size: 18px; font-weight: 600; margin: 0; letter-spacing: 2px; text-transform: uppercase; color: #e5e5ea; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); line-height: 1;}
+        .card-phone { font-size: 13px; color: #86868b; margin: 0; font-weight: 500; letter-spacing: 1.5px; }
+
+        /* Staggered Smooth Animation */
+        .result-animate {
+            opacity: 0;
+            animation: slideUpFade 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+        }
+
+        /* Project Cards */
+        .project-card { 
+            background: var(--card); 
+            border-radius: 20px; 
+            margin-bottom: 24px; 
+            padding: 24px; 
+            border: 1px solid var(--border); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
         
         .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px; }
         .card-header h2 { margin: 0; font-size: 20px; font-weight: 600; color: var(--primary); }
@@ -158,13 +251,13 @@
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Breakdown Math styling inside accordion */
+        /* Breakdown Math */
         .math-line { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e5e5ea; font-size: 14px; color: var(--text-main); }
         .math-line:last-child { border-bottom: none; }
         .math-total { font-weight: 600; color: var(--primary); font-size: 16px; padding-top: 12px; }
         .discount-text { color: var(--success); }
 
-        /* Insight Box inside accordion */
+        /* Insight Box */
         .insight-box { margin-top: 20px; background: var(--accent-light); padding: 20px; border-radius: 12px; font-size: 15px; line-height: 1.6; color: #1d4ed8; }
         .insight-para { margin-top: 0; margin-bottom: 12px; }
         .insight-para:last-child { margin-bottom: 0; }
@@ -293,7 +386,7 @@
                     <label class="tile">
                         <input type="radio" name="purpose" value="both" onclick="handleAutoAdvance()">
                         <div class="tile-content">
-                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 17 22 12"/></svg>
                             <span class="tile-text">Both</span><span class="tile-subtext">Hold / Live</span>
                         </div>
                     </label>
@@ -374,15 +467,11 @@
     </div>
     
     <div id="loading-screen">
-        <div class="spinner"></div>
-        <h2 id="loading-text" style="color: var(--primary); margin-top: 25px;">Analyzing preferences...</h2>
+        <div class="ai-glow"></div>
+        <h2 id="loading-text" style="color: var(--primary); margin-top: 35px;">Analyzing preferences...</h2>
     </div>
 
     <div id="results">
-        <div class="header">
-            <h1 id="results-title">Your Matches</h1>
-            <p>Ranked strictly on your unique parameters</p>
-        </div>
         <div id="results-container"></div>
         <button class="secondary-btn" onclick="resetApp()">Start New Search</button>
     </div>
@@ -506,21 +595,21 @@ function initiateProcessing() {
         setTimeout(() => {
             loadingText.innerText = "Calculating estimates...";
             loadingText.style.opacity = 1;
-        }, 200);
-    }, 800);
+        }, 300);
+    }, 900);
     
     setTimeout(() => {
         loadingText.style.opacity = 0;
         setTimeout(() => {
             loadingText.innerText = "Ranking properties...";
             loadingText.style.opacity = 1;
-        }, 200);
-    }, 1600);
+        }, 300);
+    }, 1800);
     
     setTimeout(() => {
         document.getElementById("loading-screen").style.display = "none";
         findMatches();
-    }, 2500);
+    }, 2800);
 }
 
 // --- MASTER DATABASE ---
@@ -548,7 +637,7 @@ function formatCurrency(amount) {
     return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(amount);
 }
 
-// 6-VARIABLE REASONING ENGINE (Fully Upgraded Plot Logic)
+// 6-VARIABLE REASONING ENGINE 
 function generateDeepInsight(project, userInputs, math) {
     let mismatchWarning = "";
     let p1 = "", p2 = "", p3 = ""; 
@@ -559,14 +648,12 @@ function generateDeepInsight(project, userInputs, math) {
     const uFamily = userInputs.familySize; 
     const uSize = userInputs.size;
 
-    // Core Purpose Mismatch Alert
     if (uPurpose === "residential" && !project.purpose.includes("residential")) {
         mismatchWarning += `<p class="insight-para"><span class="warning-text">🛑 NOT IDEAL FOR RESIDENTIAL:</span> Aapne strictly "Residential" (Ghar banana) select kiya hai, but yeh project purely ek investment/commercial focus asset hai. Yahan immediately family ke saath shift hona feasible ya best idea nahi hoga.</p>`;
     } else if (uPurpose === "investment" && !project.purpose.includes("investment")) {
         mismatchWarning += `<p class="insight-para"><span class="warning-text">🛑 NOT IDEAL FOR ROI INVESTMENT:</span> Aapka goal pure "Investment" (High ROI) hai, par yeh completely ready aur mature residential project hai. Yahan initial capital appreciation slow hoga compared to raw or under-construction land.</p>`;
     }
 
-    // --- FLAT LOGIC ---
     if (project.type === "flat") {
         if (project.name === "Mangla Classic and Desire") {
             p1 = (uFamily === "5+" || uFamily === "3-4") 
@@ -592,9 +679,7 @@ function generateDeepInsight(project, userInputs, math) {
             p2 = `Offices ya showrooms plan karne ke liye yeh currently is stretch ka sabse grand under-construction project hai.`;
         }
     } 
-    // --- PLOT LOGIC (DYNAMIC PER PROJECT) ---
     else {
-        // Shared Plot Warnings
         if (uFunding === "loan" && project.rera === "N/A") {
             mismatchWarning += `<p class="insight-para"><span class="warning-text">⚠️ RERA Reality Check:</span> Aapne Bank Loan chuna hai, par yeh plot filhal RERA approved nahi hai. Yahan invest karne ke liye aapko cash-funding ki zarurat padegi ya RERA aane tak rukna hoga.</p>`;
         } 
@@ -602,7 +687,6 @@ function generateDeepInsight(project, userInputs, math) {
             mismatchWarning += `<p class="insight-para"><span class="warning-text">📐 Size Alert:</span> Aapne apna ghar banane ka goal bataya hai, but ${uSize} sqft ek compact plot hai. Ek proper standalone villa ke liye future mein space constrain feel ho sakta hai.</p>`;
         }
 
-        // Project-Specific AI Reasoning
         if (project.name === "Shanti Vihar") {
             if (uUrgency === "Immediate" && uPurpose !== "investment") {
                 p1 = `<span class="success-text">Ultimate Residential Match:</span> Sirf 4km ki doori aur 'Ready-to-Move' status ka matlab hai aap turant apna ghar bana kar shift ho sakte hain. SAIMS commute ke liye yeh sabse stress-free option hai.`;
@@ -643,16 +727,27 @@ function generateDeepInsight(project, userInputs, math) {
         }
     }
 
-    // --- SHARED BUDGET LOGIC ---
     let totalLakhs = parseFloat(math.totalLakhs);
     if (uBudget === 1000) {
-        p3 = `<span class="success-text">Premium Budget Strategy:</span> Open budget constraint hone se, is premium asset ko hold karna aapke portfolio ke liye bilkul stress-free hai.`;
+        if (totalLakhs >= 60) {
+            p3 = `<span class="success-text">Premium Portfolio Fit:</span> Aapke open budget ke mutabiq, yeh ₹${totalLakhs}L ka premium asset aapke portfolio mein ek strong long-term addition banega.`;
+        } else if (totalLakhs >= 40) {
+            p3 = `<span class="success-text">Smart Capital Allocation:</span> Aapka budget constraint-free hai, aur yeh option sirf ₹${totalLakhs}L mein ek excellent value-for-money asset deliver kar raha hai.`;
+        } else {
+            p3 = `<span class="success-text">High Liquidity Advantage:</span> Open budget hone ke bawajood, yeh ₹${totalLakhs}L ka asset kaafi under-valued entry point de raha hai. Bacha hua massive capital aap construction ya multiple investments mein use kar sakte hain.`;
+        }
     } else if (totalLakhs <= uBudget) {
         let savings = (uBudget - totalLakhs).toFixed(2);
-        p3 = `<span class="success-text">Financially Optimized:</span> Yeh aapke ${uBudget}L budget mein easily fit hai, saving you approx ₹${savings} Lakhs in extra capital for interior or construction.`;
+        if (savings > 5) {
+            p3 = `<span class="success-text">Financially Highly Optimized:</span> Yeh aapke ₹${uBudget}L budget bracket ke andar bahut easily fit hai. Aapke paas approx ₹${savings} Lakhs ka surplus bachega jise aap future development mein laga sakte hain.`;
+        } else if (savings > 0) {
+            p3 = `<span class="success-text">Budget Fit:</span> Yeh perfectly aapke ₹${uBudget}L ki limit mein set ho raha hai, leaving a buffer of ₹${savings} Lakhs.`;
+        } else {
+            p3 = `<span class="success-text">Exact Budget Match:</span> Yeh option aapki ₹${uBudget}L ki limit ko perfectly maximize kar raha hai without over-extending.`;
+        }
     } else {
         let diff = (totalLakhs - uBudget).toFixed(2);
-        p3 = `<span class="warning-text">Budget Extension Alert:</span> Current rates aur taxes milakar yeh aapke budget se lagbhag ₹${diff} Lakhs upar ja raha hai. Finance option consider karna zaroori ho sakta hai.`;
+        p3 = `<span class="warning-text">Budget Extension Alert:</span> Current rates aur taxes milakar yeh aapke budget se lagbhag ₹${diff} Lakhs upar ja raha hai. Is specific option ke liye funding strategy thodi adjust karni hogi.`;
     }
 
     let finalInsight = mismatchWarning;
@@ -662,7 +757,6 @@ function generateDeepInsight(project, userInputs, math) {
     return finalInsight;
 }
 
-// Accordion Toggle Logic
 function toggleAccordion(btn) {
     const content = btn.nextElementSibling;
     if (content.style.display === "block") {
@@ -807,15 +901,66 @@ function findMatches() {
     const container = document.getElementById("results-container");
     container.innerHTML = "";
 
+    let delayBase = 0;
+
+    // --- 1. RENDER CENTURION BLACK CARD FIRST ---
+    let cardDataHTML = `
+        <div class="card-data-item"><span class="card-data-label">Type</span><span class="card-data-value">${sheetPropType}</span></div>
+        <div class="card-data-item"><span class="card-data-label">Goal</span><span class="card-data-value">${sheetPurpose}</span></div>
+        <div class="card-data-item"><span class="card-data-label">Timeline</span><span class="card-data-value">${userUrgency}</span></div>
+    `;
+    if (activeStepsList.includes(6) && userFamily !== "N/A") {
+        cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Family</span><span class="card-data-value">${userFamily}</span></div>`;
+    }
+    if (userPropType === 'plot') {
+        cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Size</span><span class="card-data-value">${userSize} SQFT</span></div>`;
+        if (userPref !== "none") cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Premium</span><span class="card-data-value">${sheetPref}</span></div>`;
+    }
+    cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Funding</span><span class="card-data-value">${sheetFunding}</span></div>`;
+    cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Budget</span><span class="card-data-value">${sheetBudget}</span></div>`;
+
+    container.innerHTML += `
+        <div class="black-card result-animate" style="animation-delay: ${delayBase}s">
+            <div class="card-top">
+                <div class="card-top-left">
+                    <div class="card-chip"></div>
+                    <h2 class="card-name">${userName}</h2>
+                </div>
+                <div class="card-title">Client Blueprint</div>
+            </div>
+            <div class="card-data-grid">
+                ${cardDataHTML}
+            </div>
+            <div class="card-footer">
+                <p class="card-phone">${userPhone}</p>
+            </div>
+        </div>
+    `;
+    
+    delayBase += 0.25; 
+
+    // --- 2. RENDER THE "YOUR MATCHES" HEADER ---
+    container.innerHTML += `
+        <div class="header result-animate" style="animation-delay: ${delayBase}s">
+            <h1 id="results-title">Your Matches</h1>
+            <p>Ranked strictly on your unique parameters</p>
+        </div>
+    `;
+    
+    delayBase += 0.20;
+
+    // --- 3. RENDER GLOBAL WARNING (IF APPLICABLE) ---
     if (userBudgetLakhs !== 1000 && scoredProjects.length > 0 && scoredProjects[0].gapAmount > 5) {
         container.innerHTML += `
-            <div class="global-warning">
+            <div class="global-warning result-animate" style="animation-delay: ${delayBase}s">
                 <h3>⚠️ Budget Extension Required</h3>
                 <p>There are currently no options strictly under ${userBudgetLakhs} Lakhs for your exact parameters. We have ranked the closest possible options below.</p>
             </div>
         `;
+        delayBase += 0.25;
     }
 
+    // --- 4. RENDER PROJECT CARDS STAGGERED ---
     scoredProjects.forEach((match, index) => {
         let badgeClass = index === 0 ? "rank-badge top-rank" : "rank-badge";
         let badgeText = index === 0 ? "Top Match" : `Match #${index + 1}`;
@@ -860,7 +1005,7 @@ function findMatches() {
         let waLink = `https://wa.me/918103423011?text=${waMessage}`;
 
         container.innerHTML += `
-            <div class="project-card">
+            <div class="project-card result-animate" style="animation-delay: ${delayBase}s">
                 <div class="card-header">
                     <h2>${match.name}</h2>
                     <div class="${badgeClass}">${badgeText}</div>
@@ -904,6 +1049,8 @@ function findMatches() {
                 </div>
             </div>
         `;
+        
+        delayBase += 0.25; 
     });
 
     document.getElementById("quiz").style.display = "none";
