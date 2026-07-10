@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Shivalay Infratech | Premium Real Estate Matchmaker</title>
-    <meta name="description" content="Hum bharose ko pyaar se bunte hain, tabhi log humein chunte hain. Take our personalized assessment to find your ideal property along the Indore-Ujjain corridor.">
-
+    <title>Find Your Ideal Property</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
-        
         :root {
+            /* Apple Design System Colors */
             --primary: #1d1d1f; 
             --accent: #0071e3; 
             --accent-light: #e8f0fe;
@@ -25,915 +22,1076 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
+            /* Native Apple Typography */
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg); 
-            color: var(--text-main); 
-            margin: 0; 
-            padding: 20px 15px;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
+            background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px 15px;
+            display: flex; flex-direction: column; align-items: center;
         }
-
-        /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
-        #brand-logo {
-            position: fixed;
-            top: 15vh;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100px; 
-            width: auto;
-            object-fit: contain;
-            z-index: 1001; 
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
-        }
-
-        #brand-logo.quiz-mode {
-            top: 16px;
-            height: 45px;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05));
-        }
-
-        /* 💎 SHIVALAY LANDING PAGE STYLES */
-        #landing-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('images/lander.png');
-            background-size: cover;
-            background-position: center;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: opacity 0.8s ease;
-        }
-
-        .landing-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            z-index: 1;
-        }
-
-        .landing-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 500px;
-            height: 100%;
-            padding: calc(15vh + 120px) 24px 4vh 24px; 
-        }
-
-        .landing-text {
-            margin-top: 2vh;
-            transition: opacity 0.4s ease;
-        }
-
-        .eyebrow {
-            color: rgba(255,255,255,0.7);
-            font-size: 11px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .main-tagline {
-            font-family: 'Playfair Display', serif;
-            color: #ffffff;
-            font-size: 32px;
-            line-height: 1.3;
-            font-style: italic;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
-        }
-
-        .sub-text {
-            color: rgba(255,255,255,0.85);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .landing-action {
-            margin-top: auto; 
-            width: 100%;
-            transition: opacity 0.4s ease;
-        }
-
-        .btn-start {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-            padding: 18px 32px;
-            border-radius: 16px;
-            font-size: 16px;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            animation: pulse 2.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-            50% { transform: scale(1.03); box-shadow: 0 8px 32px rgba(255,255,255,0.2); }
-            100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-        }
-
-        .legal-microcopy {
-            color: rgba(255,255,255,0.5);
-            font-size: 10px;
-            margin-top: 16px;
-            line-height: 1.4;
-        }
-
-        body.quiz-active { padding-top: 80px; }
-
-        /* General Quiz Styles */
+        
         .container { max-width: 600px; width: 100%; }
         
-        .progress-bar {
-            width: 100%; height: 2px; background-color: var(--border);
-            border-radius: 1px; margin-bottom: 30px; overflow: hidden;
+        .header { text-align: center; margin-bottom: 25px; margin-top: 10px; }
+        .header h1 { margin: 0; font-size: 28px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+        .header p { color: var(--text-muted); margin-top: 8px; font-size: 15px; font-weight: 400; }
+        
+        /* Razor-Thin Apple Progress Bar */
+        .progress-container {
+            width: 100%; background-color: #e5e5ea; 
+            height: 2px; margin-bottom: 30px; 
         }
         .progress-fill {
-            height: 100%; background-color: var(--accent); width: 0%;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%; background: var(--accent);
+            width: 10%; transition: width 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
-        .step { display: none; animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .step.active { display: block; }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+        .step-container {
+            display: none; 
+            animation: slideUpFade 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .question {
-            font-size: 24px; font-weight: 600; margin-bottom: 24px;
-            letter-spacing: -0.5px; line-height: 1.2;
+        .q-block {
+            background: var(--card); padding: 32px 24px; border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04); margin-bottom: 25px; 
         }
+        .q-title { margin: 0 0 8px 0; font-size: 20px; font-weight: 600; color: var(--primary); letter-spacing: -0.3px;}
+        .q-subtitle { margin: 0 0 24px 0; font-size: 15px; color: var(--text-muted); line-height: 1.4; font-weight: 400;}
+        
+        .tile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .tile-grid.col-2 { grid-template-columns: repeat(2, 1fr); }
+        .tile-grid.col-3 { grid-template-columns: repeat(3, 1fr); }
+        
+        .tile label { cursor: pointer; display: block; height: 100%; }
+        .tile input[type="radio"] { display: none; }
+        
+        /* Spring Animation for Tiles */
+        .tile-content {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px 10px; border: 1.5px solid var(--border); border-radius: 14px;
+            background: var(--card); transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            text-align: center; height: 100%; width: 100%;
+        }
+        .tile-content:active { transform: scale(0.96); }
+        .tile-content:hover { border-color: #a1a1a6; }
+        
+        .tile input[type="radio"]:checked + .tile-content {
+            border-color: var(--accent); background: var(--accent-light);
+            border-width: 1.5px;
+        }
+        
+        /* Monochromatic SVG Icons */
+        .tile-icon { width: 28px; height: 28px; margin-bottom: 12px; color: var(--primary); transition: color 0.3s ease; }
+        .tile input[type="radio"]:checked + .tile-content .tile-icon { color: var(--accent); }
+        
+        .tile-text { font-size: 15px; font-weight: 600; color: var(--primary); line-height: 1.3;}
+        .tile-subtext { font-size: 13px; color: var(--text-muted); margin-top: 4px; font-weight: 400;}
+        
+        .tile input[type="radio"]:checked + .tile-content .tile-text { color: var(--accent); }
+        .tile input[type="radio"]:checked + .tile-content .tile-subtext { color: var(--accent); }
 
-        .options { display: grid; gap: 12px; }
-        
-        label.option {
-            background-color: var(--card); border: 1px solid var(--border);
-            padding: 18px 20px; border-radius: 14px; font-size: 16px;
-            font-weight: 500; cursor: pointer; display: flex; align-items: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px -5px rgba(0,0,0,0.03);
+        .text-input {
+            width: 100%; padding: 18px; border-radius: 12px; border: 1.5px solid var(--border); 
+            font-size: 17px; font-family: inherit; font-weight: 400; color: var(--primary);
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            background-color: var(--card);
         }
-        
-        label.option:active { transform: scale(0.98); }
-        
-        input[type="radio"] { display: none; }
-        
-        input[type="radio"]:checked + label.option, label.option.selected {
-            border-color: var(--accent); background-color: var(--accent-light);
-            color: var(--accent); box-shadow: 0 4px 15px -5px rgba(0, 113, 227, 0.2);
-        }
-        
-        .nav-buttons {
-            display: flex; justify-content: space-between; margin-top: 30px;
-        }
-        
+        .text-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15); }
+        .text-input::placeholder { color: #86868b; }
+
+        /* Navigation Buttons */
+        .nav-buttons { display: flex; gap: 12px; margin-top: 10px; width: 100%; }
         button {
-            padding: 16px 24px; border: none; border-radius: 12px;
-            font-size: 16px; font-weight: 600; cursor: pointer;
-            transition: all 0.2s;
+            padding: 18px; border-radius: 980px; /* Apple Pill Shape */
+            font-size: 17px; font-weight: 600; border: none; cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); font-family: inherit;
         }
+        button:active { transform: scale(0.97); }
         
-        .btn-prev { background-color: transparent; color: var(--accent); padding-left: 0; }
-        .btn-next { background-color: var(--accent); color: white; width: 100%; box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3); }
-        .btn-next:active { transform: scale(0.98); }
+        button.primary-btn { background: var(--accent); color: white; flex: 2; }
+        button.primary-btn:hover { background: #0077ed; }
         
-        input[type="text"], input[type="tel"] {
-            width: 100%; padding: 18px; border: 1px solid var(--border);
-            border-radius: 14px; font-size: 16px; background-color: var(--card);
-            outline: none; -webkit-appearance: none; box-shadow: 0 4px 12px -5px rgba(0,0,0,0.03);
-        }
-        input[type="text"]:focus, input[type="tel"]:focus {
-            border-color: var(--accent);
+        button.outline-btn { background-color: #e5e5ea; color: var(--primary); flex: 1; }
+        button.outline-btn:hover { background-color: #d1d1d6; }
+        
+        button.secondary-btn { background-color: transparent; color: var(--accent); margin-top: 15px; margin-bottom: 40px; width: 100%; font-size: 15px;}
+        button.secondary-btn:hover { text-decoration: underline; }
+
+        /* Loading Screen */
+        #loading-screen { display: none; text-align: center; padding: 100px 20px; }
+        
+        .ai-glow {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #9b51e0, #4facfe);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite, pulseGlow 2s cubic-bezier(0.4, 0, 0.2, 1) infinite, shapeShift 4s ease-in-out infinite alternate;
+            box-shadow: 0 0 25px rgba(0, 113, 227, 0.4);
         }
 
-        /* Results & Centurion Card */
-        #results { display: none; width: 100%; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 25px rgba(0, 113, 227, 0.4); } 50% { transform: scale(1.15); opacity: 0.85; box-shadow: 0 0 45px rgba(155, 81, 224, 0.6); } }
+        @keyframes shapeShift { 0% { border-radius: 50%; } 100% { border-radius: 40% 60% 60% 40% / 40% 50% 50% 60%; } }
+        #loading-text { transition: opacity 0.3s ease-in-out; font-weight: 500; font-size: 19px; }
+
+        /* Results Area */
+        #results { display: none; width: 100%; max-width: 600px;}
         
-        .summary-card {
-            background: linear-gradient(135deg, #2c2c2e 0%, #1a1a1c 100%);
-            border-radius: 20px; padding: 24px; color: white;
-            margin-bottom: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: space-between;
-            min-height: 200px;
+        /* --- THE CENTURION BLACK CARD UPGRADE --- */
+        .black-card {
+            background: linear-gradient(135deg, #212121 0%, #0d0d0d 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px; 
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
         }
         
-        .emv-chip {
-            width: 45px; height: 35px; border-radius: 6px;
-            background: linear-gradient(135deg, #e5e5ea 0%, #d2d2d7 50%, #f5f5f7 100%);
-            box-shadow: inset 0 1px 3px rgba(255,255,255,0.5), inset 0 -1px 3px rgba(0,0,0,0.2);
-            margin-bottom: 12px; position: relative;
+        /* Metallic diagonal sheen */
+        .black-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 50%);
+            transform: rotate(30deg);
+            pointer-events: none;
         }
+
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; z-index: 1; position: relative;}
         
-        .emv-chip::after {
-            content: ''; position: absolute; top: 10%; left: 10%; width: 80%; height: 80%;
-            border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
+        .card-top-left {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
-        
-        .card-top-left { display: flex; flex-direction: column; }
-        
-        .client-name-emboss {
-            font-family: "SF Pro Display", -apple-system, sans-serif;
-            font-size: 18px; font-weight: 600; color: #e5e5ea;
-            letter-spacing: 2px; text-transform: uppercase;
-            text-shadow: -1px -1px 1px rgba(255,255,255,0.2), 1px 1px 1px rgba(0,0,0,0.6);
-            margin-top: 4px;
+
+        /* The Silver EMV Chip */
+        .card-chip {
+            width: 38px; height: 28px;
+            background: linear-gradient(135deg, #e5e5ea 0%, #86868b 100%);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.3);
         }
-        
+        .card-chip::after {
+            content:''; position:absolute; top: 11px; left:0; width:100%; height:1px; background: rgba(0,0,0,0.25);
+            box-shadow: 0 6px 0 rgba(0,0,0,0.25);
+        }
+        .card-chip::before {
+            content:''; position:absolute; top: 0; left:14px; width:1px; height:100%; background: rgba(0,0,0,0.25);
+            box-shadow: 10px 0 0 rgba(0,0,0,0.25);
+        }
+
+        .card-title { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #86868b; text-align: right; font-weight: 600;}
+
+        /* Laser-etched data styling */
+        .card-data-grid { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-bottom: 24px; z-index: 1; position: relative; }
+        .card-data-item { display: flex; flex-direction: column; }
+        .card-data-label { font-size: 9px; text-transform: uppercase; color: #86868b; letter-spacing: 1px; margin-bottom: 3px; }
+        .card-data-value { font-size: 12px; font-weight: 600; color: #d2d2d7; text-transform: uppercase; letter-spacing: 0.5px; }
+
         .card-footer {
-            display: flex; justify-content: space-between; align-items: flex-end;
-            margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 16px;
-        }
-        
-        .summary-item { font-size: 12px; color: #a1a1a6; display: flex; flex-direction: column; }
-        .summary-item strong { font-size: 14px; color: white; font-weight: 500; margin-top: 2px; }
-        
-        .project-card {
-            background-color: var(--card); border-radius: 18px; padding: 20px;
-            margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.03); opacity: 0;
-            transform: translateY(30px); animation: staggerFade 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            display: flex; justify-content: flex-end; align-items: flex-end; z-index: 1; position: relative;
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;
         }
 
-        @keyframes staggerFade {
-            to { opacity: 1; transform: translateY(0); }
+        /* Embossed Name styling - Now 18px and positioned under the chip */
+        .card-name { font-size: 18px; font-weight: 600; margin: 0; letter-spacing: 2px; text-transform: uppercase; color: #e5e5ea; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); line-height: 1;}
+        .card-phone { font-size: 13px; color: #86868b; margin: 0; font-weight: 500; letter-spacing: 1.5px; }
+
+        /* Staggered Smooth Animation */
+        .result-animate {
+            opacity: 0;
+            animation: slideUpFade 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+        }
+
+        /* Project Cards */
+        .project-card { 
+            background: var(--card); 
+            border-radius: 20px; 
+            margin-bottom: 24px; 
+            padding: 24px; 
+            border: 1px solid var(--border); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .card-header h2 { margin: 0; font-size: 20px; letter-spacing: -0.3px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px; }
+        .card-header h2 { margin: 0; font-size: 20px; font-weight: 600; color: var(--primary); }
+        .rank-badge { font-size: 12px; font-weight: 700; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; background: var(--accent-light); color: var(--accent); }
+        .rank-badge.top-rank { background: #e8f5e9; color: var(--success); }
         
-        .match-badge {
-            background-color: var(--success); color: white; padding: 4px 10px;
-            border-radius: 8px; font-size: 12px; font-weight: 600;
-        }
-        .match-badge.good { background-color: #f56300; }
-        
-        .hero-price { font-size: 28px; color: var(--accent); margin: 0 0 16px 0; font-weight: 700; letter-spacing: -0.5px; }
-        
-        .specs-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
-            background-color: var(--bg); padding: 16px; border-radius: 12px;
-        }
-        
+        .hero-price { font-size: 32px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; margin: 0; }
+        .hero-sub { font-size: 15px; color: var(--text-muted); margin: 4px 0 24px 0; font-weight: 500;}
+
+        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
         .spec-item { display: flex; flex-direction: column; }
-        .spec-label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
-        .spec-value { font-size: 14px; font-weight: 600; }
-        
-        .wa-action {
-            display: block; width: 100%; text-align: center; background-color: #25D366;
-            color: white; padding: 14px; border-radius: 12px; text-decoration: none;
-            font-weight: 600; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            transition: all 0.2s;
-        }
-        .wa-action:active { transform: scale(0.98); }
-        
+        .spec-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .spec-value { font-size: 15px; color: var(--primary); font-weight: 500; line-height: 1.3;}
+
+        /* Accordion Button */
         .accordion-btn {
-            background-color: var(--accent-light); color: var(--accent);
-            width: 100%; text-align: left; padding: 14px 16px; font-size: 14px;
+            width: 100%; background: #f5f5f7; color: var(--primary); border-radius: 12px;
+            padding: 16px; font-size: 15px; font-weight: 500; text-align: left;
             display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 16px; border: 1px solid var(--border);
         }
-        .accordion-content {
-            display: none; padding: 16px 0 0 0; border-top: 1px solid var(--border);
-            margin-top: 16px; font-size: 14px; line-height: 1.5; color: var(--text-muted);
-        }
+        .accordion-btn:hover { background: #e5e5ea; }
+        .accordion-content { display: none; margin-top: 16px; animation: fadeIn 0.3s ease; }
         
-        /* Apple AI Glow Loading */
-        #loading {
-            display: none; flex-direction: column; align-items: center;
-            justify-content: center; height: 50vh; text-align: center;
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Breakdown Math */
+        .math-line { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e5e5ea; font-size: 14px; color: var(--text-main); }
+        .math-line:last-child { border-bottom: none; }
+        .math-total { font-weight: 600; color: var(--primary); font-size: 16px; padding-top: 12px; }
+        .discount-text { color: var(--success); }
+
+        /* Insight Box */
+        .insight-box { margin-top: 20px; background: var(--accent-light); padding: 20px; border-radius: 12px; font-size: 15px; line-height: 1.6; color: #1d4ed8; }
+        .insight-para { margin-top: 0; margin-bottom: 12px; }
+        .insight-para:last-child { margin-bottom: 0; }
+        .warning-text { color: var(--error); font-weight: 600; }
+        .success-text { color: var(--success); font-weight: 600; }
+
+        .wa-action { 
+            width: 100%; background: #34c759; color: white; border-radius: 980px; padding: 18px; 
+            font-size: 17px; font-weight: 600; text-align: center; text-decoration: none; 
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
-        
-        .apple-glow {
-            width: 80px; height: 80px; border-radius: 50%;
-            background: linear-gradient(135deg, #0071e3, #42a1ff, #a0cfff);
-            filter: blur(15px); animation: pulseGlow 2s ease-in-out infinite alternate;
-            margin-bottom: 24px;
+        .wa-action:hover { background: #28a745; transform: scale(0.98); }
+
+        .global-warning {
+            background: #fff0f0; border: 1px solid #ffd2d2; padding: 20px; 
+            border-radius: 16px; margin-bottom: 30px; text-align: center;
         }
-        
-        @keyframes pulseGlow {
-            0% { transform: scale(0.8); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 1; }
+        .global-warning h3 { color: var(--error); margin: 0 0 8px 0; font-size: 17px; font-weight: 600;}
+        .global-warning p { color: #8a0009; margin: 0; font-size: 14px; line-height: 1.4; }
+
+        @media (max-width: 600px) {
+            body { padding: 12px; }
+            .header h1 { font-size: 24px; }
+            .q-block { padding: 24px 20px; }
+            .tile-grid.col-3 { grid-template-columns: repeat(2, 1fr); }
+            .tile-grid.col-2 { grid-template-columns: 1fr; }
+            #budget-grid { grid-template-columns: repeat(2, 1fr); }
+            .specs-grid { grid-template-columns: 1fr; gap: 12px; }
         }
-        
-        .loading-text { font-size: 18px; font-weight: 500; color: var(--text-main); letter-spacing: -0.3px; }
     </style>
 </head>
 <body>
 
-    <img id="brand-logo" src="images/shivalay-logo.png" alt="Shivalay Infratech">
+<div class="container">
+    <div id="quiz">
+                <div class="header">
+            <img src="images/shivalay-logo.png" 
+     alt="Company Logo" 
+     style="height: 65px; width: auto; margin-bottom: 16px; object-fit: contain;">
 
-    <div id="landing-page">
-        <div class="landing-overlay"></div>
-        <div class="landing-content">
-            
-            <div class="landing-text" id="landing-text">
-                <div class="eyebrow">SHIVALAY INFRATECH PRESENTS</div>
-                <h1 class="main-tagline">"Hum bharose ko pyaar se bunte hain, tabhi log humein chunte hain."</h1>
-                <p class="sub-text">Indore-Ujjain highway par aapke sapno ki property aur smart investment dhoondhne ka ek personalized tareeqa.</p>
+                 
+            <h1>Find Your Ideal Property</h1>
+            <p>Personalized recommendations based on your budget and goals</p>
+        </div>
+
+
+        <div class="progress-container">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+
+        <div id="form-steps">
+            <div class="q-block step-container" id="step-1">
+                <div class="q-title">Chaliye aapke naam se shuru karte hain</div>
+                <p class="q-subtitle">Yeh personalized report hum kiske liye prepare kar rahe hain?</p>
+                <input type="text" id="userName" class="text-input" placeholder="Enter your full name" onkeypress="handleEnter(event)">
             </div>
 
-            <div class="landing-action" id="landing-action">
-                <button class="btn-start" onclick="startAssessment()">Start Assessment</button>
-                <p class="legal-microcopy">Aapki privacy humari priority hai. 'Start Assessment' par click karke, aap apni property preferences Shivalay Infratech ki team ke sath secure roop se share karne ki anumati dete hain.</p>
+            <div class="q-block step-container" id="step-2">
+                <div class="q-title">Aapse milkar acha laga, <span id="display-name" style="color: var(--accent);"></span>!</div>
+                <p class="q-subtitle">Aapki personalized report hum kis WhatsApp number par bhejein?</p>
+                <input type="tel" id="userPhone" class="text-input" placeholder="+91 Mobile Number" onkeypress="handleEnter(event)">
             </div>
+
+            <div class="q-block step-container" id="step-3">
+                <div class="q-title">Property finalize karne ka aapka kya timeline hai?</div>
+                <p class="q-subtitle">Kya aap turant plan kar rahe hain ya abhi market explore kar rahe hain?</p>
+                <div class="tile-grid col-3">
+                    <label class="tile">
+                        <input type="radio" name="urgency" value="Immediate" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            <span class="tile-text">Immediate</span><span class="tile-subtext">0-30 Days</span>
+                        </div>
+                    </label>
+                    <label class="tile">
+                        <input type="radio" name="urgency" value="1-3 Months" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            <span class="tile-text">1-3 Months</span><span class="tile-subtext">Actively looking</span>
+                        </div>
+                    </label>
+                    <label class="tile">
+                        <input type="radio" name="urgency" value="6+ Months" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <span class="tile-text">6+ Months</span><span class="tile-subtext">Researching</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="q-block step-container" id="step-4">
+                <div class="q-title">Aap kis tarah ki property dekh rahe hain?</div>
+                <p class="q-subtitle">Zameen lekar ghar banana hai, ya bani-banayi property chahiye?</p>
+                <div class="tile-grid col-2">
+                    <label class="tile">
+                        <input type="radio" name="propType" value="plot" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                            <span class="tile-text">Plot / Land</span><span class="tile-subtext">Ujjain Highway</span>
+                        </div>
+                    </label>
+                    <label class="tile">
+                        <input type="radio" name="propType" value="flat" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/></svg>
+                            <span class="tile-text">Flat / Commercial</span><span class="tile-subtext">Aurobindo Hub</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="q-block step-container" id="step-4">
+                <div class="q-title">Aap kis tarah ki property dekh rahe hain?</div>
+                <p class="q-subtitle">Zameen lekar ghar banana hai, ya bani-banayi property chahiye?</p>
+                <div class="tile-grid col-2">
+                    <label class="tile">
+                        <input type="radio" name="propType" value="plot" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                            <span class="tile-text">Plot / Land</span><span class="tile-subtext">Ujjain Highway</span>
+                        </div>
+                    </label>
+                    <label class="tile">
+                        <input type="radio" name="propType" value="flat" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/></svg>
+                            <span class="tile-text">Flat / Commercial</span><span class="tile-subtext">Aurobindo Hub</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="q-block step-container" id="step-5">
+                <div class="q-title">Is property ke liye aapka primary goal kya hai?</div>
+                <p class="q-subtitle">Aap khud rehne ka plan kar rahe hain, ya yeh ek investment hai?</p>
+                <div class="tile-grid col-3">
+                    <label class="tile">
+                        <input type="radio" name="purpose" value="residential" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            <span class="tile-text">Residential</span><span class="tile-subtext">For Family</span>
+                        </div>
+                    </label>
+                    <label class="tile">
+                        <input type="radio" name="purpose" value="investment" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                            <span class="tile-text">Investment</span><span class="tile-subtext">High ROI</span>
+                        </div>
+                    </label>
+                    <label class="tile">
+                        <input type="radio" name="purpose" value="both" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 17 22 12"/></svg>
+                            <span class="tile-text">Both</span><span class="tile-subtext">Hold / Live</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="q-block step-container" id="step-6">
+                <div class="q-title">Aapki family mein kitne members hain?</div>
+                <p class="q-subtitle">Is naye ghar mein kitne log rahenge?</p>
+                <div class="tile-grid col-3">
+                    <label class="tile"><input type="radio" name="familySize" value="1-2" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">1-2</span><span class="tile-subtext">Compact</span></div></label>
+                    <label class="tile"><input type="radio" name="familySize" value="3-4" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">3-4</span><span class="tile-subtext">Standard</span></div></label>
+                    <label class="tile"><input type="radio" name="familySize" value="5+" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">5+</span><span class="tile-subtext">Large</span></div></label>
+                </div>
+            </div>
+
+            <div class="q-block step-container" id="step-7">
+                <div class="q-title">Aapko kitne size ka plot chahiye?</div>
+                <p class="q-subtitle">Apni requirement ke hisaab se plot ka size select karein.</p>
+                <div class="tile-grid col-3">
+                    <label class="tile"><input type="radio" name="size" value="600" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">600 SqFt</span><span class="tile-subtext">Micro</span></div></label>
+                    <label class="tile"><input type="radio" name="size" value="800" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">800 SqFt</span><span class="tile-subtext">Compact</span></div></label>
+                    <label class="tile"><input type="radio" name="size" value="1000" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">1000 SqFt</span><span class="tile-subtext">Standard</span></div></label>
+                    <label class="tile"><input type="radio" name="size" value="1200" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">1200 SqFt</span><span class="tile-subtext">Comfort</span></div></label>
+                    <label class="tile"><input type="radio" name="size" value="1500" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">1500 SqFt</span><span class="tile-subtext">Spacious</span></div></label>
+                    <label class="tile"><input type="radio" name="size" value="2000" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">2000+ SqFt</span><span class="tile-subtext">Villa Size</span></div></label>
+                </div>
+            </div>
+
+            <div class="q-block step-container" id="step-8">
+                <div class="q-title">Plot ki position ke liye koi preference hai?</div>
+                <p class="q-subtitle">Standard plot chahiye ya corner/garden facing jaisa koi premium option?</p>
+                <div class="tile-grid col-2">
+                    <label class="tile"><input type="radio" name="preference" value="none" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">Standard Plot</span><span class="tile-subtext">No Extra Charge</span></div></label>
+                    <label class="tile"><input type="radio" name="preference" value="garden" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">Garden Facing</span><span class="tile-subtext">Premium Appiles</span></div></label>
+                    <label class="tile"><input type="radio" name="preference" value="corner" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">Corner Plot</span><span class="tile-subtext">Premium Applies</span></div></label>
+                    <label class="tile"><input type="radio" name="preference" value="both" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">Corner + Garden</span><span class="tile-subtext">Special Deal</span></div></label>
+                </div>
+            </div>
+
+            <div class="q-block step-container" id="step-9">
+                <div class="q-title">Aap is property ko kaise finance karenge?</div>
+                <p class="q-subtitle">Aap self-funding karenge ya bank loan ka plan hai?</p>
+                <div class="tile-grid col-2">
+                    <label class="tile">
+                        <input type="radio" name="funding" value="cash" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+                            <span class="tile-text">Full Cash</span><span class="tile-subtext">Self-Funded</span>
+                        </div>
+                    </label>
+                    <label class="tile">
+                        <input type="radio" name="funding" value="loan" onclick="handleAutoAdvance()">
+                        <div class="tile-content">
+                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 22 7 12 2"/><rect x="4" y="7" width="16" height="15"/><path d="M8 11v6M16 11v6M12 11v6"/></svg>
+                            <span class="tile-text">Bank Loan</span><span class="tile-subtext">Finance</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="q-block step-container" id="step-10">
+                <div class="q-title">Aapka comfortable budget bracket kya hai?</div>
+                <p class="q-subtitle">Woh maximum range select karein jisme aap comfortably invest kar sakein.</p>
+                <div id="budget-grid" class="tile-grid col-2">
+                    <label class="tile"><input type="radio" name="budget" value="25" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">Under 25 Lakhs</span></div></label>
+                    <label class="tile"><input type="radio" name="budget" value="40" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">25 - 40 Lakhs</span></div></label>
+                    <label class="tile"><input type="radio" name="budget" value="60" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">40 - 60 Lakhs</span></div></label>
+                    <label class="tile"><input type="radio" name="budget" value="1000" onclick="handleAutoAdvance()"><div class="tile-content"><span class="tile-text">Above 60 Lakhs</span><span class="tile-subtext">Premium</span></div></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button type="button" id="btn-prev" class="outline-btn" onclick="prevStep()">Back</button>
+            <button type="button" id="btn-next" class="primary-btn" onclick="nextStep()">Next</button>
         </div>
     </div>
-
-    <div class="container" id="quiz" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
-        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-
-        <div class="step active" id="step-1">
-            <div class="question">Chaliye, aapke naam se shuru karte hain.</div>
-            <input type="text" id="q_name" placeholder="Enter your full name" autocomplete="name">
-            <div class="nav-buttons">
-                <button class="btn-prev" style="visibility: hidden;">Back</button>
-                <button class="btn-next" onclick="nextStep(1)">Continue</button>
-            </div>
-        </div>
-
-        <div class="step" id="step-2">
-            <div class="question">Aapka mobile number kya hai?</div>
-            <input type="tel" id="q_phone" placeholder="Enter your 10-digit number" pattern="[0-9]*" maxlength="10">
-            <div class="nav-buttons">
-                <button class="btn-prev" onclick="prevStep(2)">Back</button>
-                <button class="btn-next" onclick="nextStep(2)">Continue</button>
-            </div>
-        </div>
-
-        <div class="step" id="step-3">
-            <div class="question">Aap property kitni jaldi finalize karna chahte hain?</div>
-            <div class="options">
-                <input type="radio" name="urgency" id="urg_1" value="immediate"><label class="option" for="urg_1">Bohot jaldi (Within 1 week)</label>
-                <input type="radio" name="urgency" id="urg_2" value="soon"><label class="option" for="urg_2">Thoda time hai (1 - 3 months)</label>
-                <input type="radio" name="urgency" id="urg_3" value="exploring"><label class="option" for="urg_3">Abhi sirf options dekh rahe hain</label>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn-prev" onclick="prevStep(3)">Back</button>
-                <button class="btn-next" onclick="nextStep(3)">Continue</button>
-            </div>
-        </div>
-
-        <div class="step" id="step-4">
-            <div class="question">Aapka primary goal kya hai?</div>
-            <div class="options">
-                <input type="radio" name="purpose" id="p_inv" value="investment"><label class="option" for="p_inv">Investment (High Return)</label>
-                <input type="radio" name="purpose" id="p_res" value="residential"><label class="option" for="p_res">Residential (Khud ke rehne ke liye)</label>
-                <input type="radio" name="purpose" id="p_both" value="both"><label class="option" for="p_both">Both (Hold & Build Later)</label>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn-prev" onclick="prevStep(4)">Back</button>
-                <button class="btn-next" onclick="nextStep(4)">Continue</button>
-            </div>
-        </div>
-
-        <div class="step" id="step-5">
-            <div class="question">Aap kya dhoondh rahe hain?</div>
-            <div class="options">
-                <input type="radio" name="prop_type" id="t_plot" value="plot" onchange="handleTypeSelection('plot')"><label class="option" for="t_plot">Plot (Zameen)</label>
-                <input type="radio" name="prop_type" id="t_flat" value="flat" onchange="handleTypeSelection('flat')"><label class="option" for="t_flat">Flat (Ready/Under-construction)</label>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn-prev" onclick="prevStep(5)">Back</button>
-                <button class="btn-next" onclick="nextStep(5)">Continue</button>
-            </div>
-        </div>
-
-        <div class="step" id="step-6a">
-            <div class="question">Plot ke liye specific requirement?</div>
-            <div class="options">
-                <input type="radio" name="plot_pos" id="pos_std" value="none"><label class="option" for="pos_std">Standard Plot chalega</label>
-                <input type="radio" name="plot_pos" id="pos_cor" value="corner"><label class="option" for="pos_cor">Corner Plot chahiye</label>
-                <input type="radio" name="plot_pos" id="pos_gar" value="garden"><label class="option" for="pos_gar">Garden Facing chahiye</label>
-                <input type="radio" name="plot_pos" id="pos_both" value="both"><label class="option" for="pos_both">Corner + Garden dono</label>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn-prev" onclick="prevStep(6, 'plot')">Back</button>
-                <button class="btn-next" onclick="nextStep(6, 'plot')">Continue</button>
-            </div>
-        </div>
-
-        <div class="step" id="step-6b">
-            <div class="question">Flat ke liye family size kya hai?</div>
-            <div class="options">
-                <input type="radio" name="family_size" id="fam_2" value="2bhk"><label class="option" for="fam_2">Small Family (Need 2 BHK)</label>
-                <input type="radio" name="family_size" id="fam_3" value="3bhk"><label class="option" for="fam_3">Medium Family (Need 3 BHK)</label>
-                <input type="radio" name="family_size" id="fam_4" value="4bhk"><label class="option" for="fam_4">Large Family (Need 4+ BHK)</label>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn-prev" onclick="prevStep(6, 'flat')">Back</button>
-                <button class="btn-next" onclick="nextStep(6, 'flat')">Continue</button>
-            </div>
-        </div>
-
-        <div class="step" id="step-7">
-            <div class="question">Aapka budget estimate kya hai?</div>
-            <div class="options">
-                <input type="radio" name="budget" id="b_25" value="25"><label class="option" for="b_25">₹25 - 40 Lakhs</label>
-                <input type="radio" name="budget" id="b_40" value="40"><label class="option" for="b_40">₹40 - 60 Lakhs</label>
-                <input type="radio" name="budget" id="b_60" value="60"><label class="option" for="b_60">₹60 Lakhs - 1 Cr+</label>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn-prev" onclick="prevStep(7)">Back</button>
-                <button class="btn-next" onclick="nextStep(7)">Continue</button>
-            </div>
-        </div>
-
-        <div class="step" id="step-8">
-            <div class="question">Payment ka plan kaisa rahega?</div>
-            <div class="options">
-                <input type="radio" name="funding" id="f_cash" value="cash"><label class="option" for="f_cash">Full Cash / Own Funds</label>
-                <input type="radio" name="funding" id="f_loan" value="loan"><label class="option" for="f_loan">Bank Loan Required</label>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn-prev" onclick="prevStep(8)">Back</button>
-                <button class="btn-next" onclick="submitData()">Find My Match</button>
-            </div>
-        </div>
+    
+    <div id="loading-screen">
+        <div class="ai-glow"></div>
+        <h2 id="loading-text" style="color: var(--primary); margin-top: 35px;">Analyzing preferences...</h2>
     </div>
 
-    <div id="loading">
-        <div class="apple-glow"></div>
-        <div class="loading-text" id="loading-text">Analyzing your portfolio...</div>
-    </div>
-
-    <div class="container" id="results">
-        <div class="summary-card">
-            <div class="card-top-left">
-                <div class="emv-chip"></div>
-                <div class="client-name-emboss" id="res_name">CLIENT NAME</div>
-            </div>
-            <div class="card-footer">
-                <div class="summary-item">Target Strategy<strong id="res_purpose">Investment</strong></div>
-                <div class="summary-item">Asset Class<strong id="res_type">Plot</strong></div>
-                <div class="summary-item">Budget Cap<strong id="res_budget">₹60L+</strong></div>
-                <div class="summary-item" style="text-align:right;">Contact<strong id="res_phone">9876543210</strong></div>
-            </div>
-        </div>
-
-        <h3 style="margin: 30px 0 20px 0; font-size: 22px; font-weight: 600; letter-spacing: -0.5px;">Curated Portfolio Matches</h3>
+    <div id="results">
         <div id="results-container"></div>
-        <button class="btn-next" style="background-color: var(--primary); margin-top: 20px;" onclick="resetApp()">Start New Assessment</button>
+        <button class="secondary-btn" onclick="resetApp()">Start New Search</button>
     </div>
+</div>
 
 <script>
-// --- 🚨 REPLACE THIS WITH YOUR DEPLOYED APPS SCRIPT URL ---
-const SHEET_WEB_APP_URL = "YOUR_GOOGLE_SHEETS_MACRO_URL_HERE";
-
-// --- 🚨 REPLACE THIS WITH YOUR 9 PROJECTS ARRAY ---
-// Make sure to add the  imgUrl: "images/project-name.jpg"  to your properties so they display nicely!
-const projects = [
-    { 
-        name: "Shanti Vihar", type: "plot", rate: 4500, rera: "P-IND-22-3767", status: "Ready", 
-        bestFor: "Residential", usps: "Fully developed, immediate registry", 
-        mpeb: 35000, plc: 10, cashDiscount: 5, p2: "Perfect for immediate house construction.", imgUrl: ""
-    },
-    { 
-        name: "Highway Trident", type: "plot", rate: 3200, rera: "Greenfield", status: "Upcoming", 
-        bestFor: "Investment", usps: "On main highway, high appreciation", 
-        mpeb: 0, plc: 0, cashDiscount: 8, p2: "Strictly for hold-and-build investors.", imgUrl: ""
-    },
-    { 
-        name: "Mangla Classic", type: "flat", rate: 0, flatCost: 35, rera: "P-UJJ-23-1122", status: "Under Construction", 
-        bestFor: "Residential", usps: "Premium amenities, near SAIMS", 
-        mpeb: 0, plc: 0, cashDiscount: 2, p2: "Ideal 2BHK/3BHK flats for families.", imgUrl: ""
-    }
-    // Paste your other projects here!
-];
-
+// --- TYPEFORM-STYLE WIZARD LOGIC ---
 let currentStepID = 1;
-const totalSteps = 8;
-const userPreferences = {};
+let activeStepsList = [];
 
-const loadingPhases = [
-    "Cross-referencing RERA database...",
-    "Calculating exact MPEB & PLC logic...",
-    "Finalizing portfolio matches..."
-];
-
-function updateOptionsUI(stepId) {
-    const inputs = document.querySelectorAll(`#step-${stepId} input[type="radio"]`);
-    inputs.forEach(input => {
-        if(input.checked) {
-            input.nextElementSibling.classList.add('selected');
-        } else {
-            input.nextElementSibling.classList.remove('selected');
-        }
-    });
+function handleEnter(e) {
+    if (e.key === 'Enter') {
+        nextStep();
+    }
 }
 
-document.querySelectorAll('input[type="radio"]').forEach(input => {
-    input.addEventListener('change', (e) => {
-        const stepDiv = e.target.closest('.step');
-        const stepId = stepDiv.id.split('-')[1];
-        updateOptionsUI(stepId);
-        
-        // Auto-advance
-        setTimeout(() => {
-            if(stepId === '5') {
-                nextStep(5);
-            } else if(stepId === '6a' || stepId === '6b') {
-                nextStep(6, userPreferences.prop_type);
-            } else if(stepId !== '8') {
-                nextStep(parseInt(stepId));
-            }
-        }, 350);
-    });
-});
+function updateActiveSteps() {
+    const propTypeEl = document.querySelector('input[name="propType"]:checked');
+    const purposeEl = document.querySelector('input[name="purpose"]:checked');
+    
+    const propType = propTypeEl ? propTypeEl.value : null;
+    const purpose = purposeEl ? purposeEl.value : null;
+    
+    activeStepsList = [1, 2, 3, 4, 5];
+    
+    if (purpose === 'residential' || purpose === 'both') { activeStepsList.push(6); }
+    if (propType === 'plot') { activeStepsList.push(7, 8); }
+    
+    activeStepsList.push(9, 10);
+    activeStepsList.sort((a, b) => a - b);
+}
 
 function renderStep() {
-    document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+    updateActiveSteps();
     
-    if (currentStepID === 6) {
-        if (userPreferences.prop_type === 'plot') {
-            document.getElementById('step-6a').classList.add('active');
-        } else {
-            document.getElementById('step-6b').classList.add('active');
-        }
+    document.querySelectorAll('.step-container').forEach(el => el.style.display = 'none');
+    
+    const stepEl = document.getElementById(`step-${currentStepID}`);
+    if (stepEl) {
+        stepEl.style.display = 'block';
+    }
+    
+    const currentIndex = activeStepsList.indexOf(currentStepID);
+    const progressPercent = ((currentIndex + 1) / activeStepsList.length) * 100;
+    document.getElementById('progress-fill').style.width = `${progressPercent}%`;
+    
+    document.getElementById('btn-prev').style.display = (currentIndex === 0) ? 'none' : 'block';
+    
+    if (currentStepID === 1 || currentStepID === 2) {
+        document.getElementById('btn-next').style.display = 'block';
     } else {
-        document.getElementById(`step-${currentStepID}`).classList.add('active');
+        document.getElementById('btn-next').style.display = 'none';
     }
-    
-    document.getElementById('progress').style.width = `${((currentStepID - 1) / totalSteps) * 100}%`;
 }
 
-function handleTypeSelection(type) {
-    userPreferences.prop_type = type;
-}
-
-function nextStep(step) {
-    if(step === 1) {
-        const name = document.getElementById('q_name').value.trim();
-        if(!name) return alert("Please enter your name");
-        userPreferences.name = name;
-    }
-    if(step === 2) {
-        const phone = document.getElementById('q_phone').value.trim();
-        if(phone.length !== 10) return alert("Please enter a valid 10-digit number");
-        userPreferences.phone = phone;
-    }
-    if(step === 3) {
-        const urg = document.querySelector('input[name="urgency"]:checked');
-        if(!urg) return alert("Please select an option");
-        userPreferences.urgency = urg.value;
-    }
-    if(step === 4) {
-        const purp = document.querySelector('input[name="purpose"]:checked');
-        if(!purp) return alert("Please select an option");
-        userPreferences.purpose = purp.value;
-    }
-    if(step === 5) {
-        const pt = document.querySelector('input[name="prop_type"]:checked');
-        if(!pt) return alert("Please select Plot or Flat");
-        userPreferences.prop_type = pt.value;
-    }
-    if(step === 6) {
-        if(userPreferences.prop_type === 'plot') {
-            const pos = document.querySelector('input[name="plot_pos"]:checked');
-            if(!pos) return alert("Please select a position preference");
-            userPreferences.plot_pos = pos.value;
-        } else {
-            const fam = document.querySelector('input[name="family_size"]:checked');
-            if(!fam) return alert("Please select a family size");
-            userPreferences.family_size = fam.value;
-        }
-    }
-    if(step === 7) {
-        const bud = document.querySelector('input[name="budget"]:checked');
-        if(!bud) return alert("Please select a budget estimate");
-        userPreferences.budget = bud.value;
-    }
-    
-    currentStepID++;
-    renderStep();
-}
-
-function prevStep(step, type=null) {
-    currentStepID--;
-    renderStep();
-}
-
-function calculateScore(project) {
-    let score = 100;
-    let mathBreakdown = {};
-    let dynamicInsight = project.p2;
-
-    if (userPreferences.prop_type !== project.type) return { score: -999 };
-
-    if (userPreferences.purpose === "residential" && project.bestFor === "Investment") {
-        score -= 50;
-        dynamicInsight = `<div style="color:var(--error); margin-bottom:8px; font-weight:600;">🛑 NOT IDEAL FOR RESIDENTIAL</div>` + dynamicInsight;
-    } else if (userPreferences.purpose === "investment" && project.bestFor === "Residential") {
-        score -= 20;
-    }
-
-    if (userPreferences.funding === "loan" && project.rera === "Greenfield") {
-        score -= 100;
-        dynamicInsight = `<div style="color:var(--error); margin-bottom:8px; font-weight:600;">🛑 BANK LOAN NOT AVAILABLE (GREENFIELD)</div>` + dynamicInsight;
-    }
-
-    if (project.type === "plot") {
-        let size = 1000;
-        if (userPreferences.budget == 40) size = 1200;
-        if (userPreferences.budget == 60) size = 1500;
-
-        let finalRate = project.rate;
-        if (userPreferences.funding === "cash") {
-            finalRate = finalRate - (finalRate * (project.cashDiscount / 100));
-        }
+function handleAutoAdvance() {
+    setTimeout(() => {
+        updateActiveSteps();
+        let currentIndex = activeStepsList.indexOf(currentStepID);
         
-        let plcAmount = 0;
-        if (userPreferences.plot_pos && userPreferences.plot_pos !== "none") {
-            plcAmount = finalRate * (project.plc / 100);
-            finalRate += plcAmount;
+        if (currentIndex === activeStepsList.length - 1) {
+            initiateProcessing();
+        } else {
+            nextStep();
         }
-
-        let totalValue = (size * finalRate) + project.mpeb;
-        let totalLakhs = (totalValue / 100000).toFixed(2);
-
-        let userBudgetMax = parseInt(userPreferences.budget);
-        if (userBudgetMax == 60) userBudgetMax = 100;
-        
-        if (totalLakhs > userBudgetMax) {
-            let difference = totalLakhs - userBudgetMax;
-            score -= (difference * 15);
-            if (score < -150) score = -150;
-        }
-
-        mathBreakdown = {
-            size: size,
-            rate: Math.round(finalRate),
-            totalLakhs: totalLakhs,
-            mpeb: project.mpeb
-        };
-    } else {
-        mathBreakdown = {
-            totalLakhs: project.flatCost
-        };
-        let userBudgetMax = parseInt(userPreferences.budget);
-        if (userBudgetMax == 60) userBudgetMax = 100;
-        if (project.flatCost > userBudgetMax) {
-            score -= ((project.flatCost - userBudgetMax) * 15);
-        }
-    }
-
-    return { score, mathBreakdown, dynamicInsight };
+    }, 250); 
 }
 
-function submitData() {
-    const fund = document.querySelector('input[name="funding"]:checked');
-    if(!fund) return alert("Please select a funding option");
-    userPreferences.funding = fund.value;
+function nextStep() {
+    if (currentStepID === 1) {
+        const nameField = document.getElementById('userName').value.trim();
+        if (!nameField) {
+            alert("Please enter your name to continue.");
+            document.getElementById('userName').focus();
+            return;
+        }
+        let firstName = nameField.split(' ')[0];
+        firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+        document.getElementById('display-name').innerText = firstName;
+    }
     
-    document.getElementById("progress").style.width = "100%";
-    
-    // Translation Logic for Google Sheets CRM
-    let translatedPosition = "";
-    if(userPreferences.prop_type === 'plot') {
-        if(userPreferences.plot_pos === 'none') translatedPosition = "Standard Plot";
-        else if(userPreferences.plot_pos === 'both') translatedPosition = "Corner + Garden";
-        else translatedPosition = userPreferences.plot_pos;
-    } else {
-        translatedPosition = userPreferences.family_size;
+    if (currentStepID === 2 && !document.getElementById('userPhone').value.trim()) {
+        alert("Please enter your WhatsApp number to continue.");
+        document.getElementById('userPhone').focus();
+        return;
     }
 
-    let translatedFunding = userPreferences.funding === 'cash' ? "Full Cash" : "Bank Loan";
+    updateActiveSteps();
+    let currentIndex = activeStepsList.indexOf(currentStepID);
     
-    let translatedBudget = userPreferences.budget;
-    if(translatedBudget === "25") translatedBudget = "25 - 40 Lakhs";
-    if(translatedBudget === "40") translatedBudget = "40 - 60 Lakhs";
-    if(translatedBudget === "60") translatedBudget = "60 Lakhs - 1 Cr+";
+    if (currentIndex < activeStepsList.length - 1) {
+        currentStepID = activeStepsList[currentIndex + 1];
+        renderStep();
+    }
+}
 
-    const payload = {
-        name: userPreferences.name,
-        phone: userPreferences.phone,
-        urgency: userPreferences.urgency,
-        purpose: userPreferences.purpose,
-        type: userPreferences.prop_type,
-        position: translatedPosition,
-        budget: translatedBudget,
-        funding: translatedFunding
-    };
+function prevStep() {
+    updateActiveSteps();
+    let currentIndex = activeStepsList.indexOf(currentStepID);
+    if (currentIndex > 0) {
+        currentStepID = activeStepsList[currentIndex - 1];
+        renderStep();
+    }
+}
 
-    fetch(SHEET_WEB_APP_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    }).catch(err => console.log("Silent CRM log triggered"));
+renderStep();
 
-    findMatches();
+// --- DYNAMIC PROCESSING ANIMATION ---
+function initiateProcessing() {
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("loading-screen").style.display = "block";
+    window.scrollTo(0, 0);
+    
+    const loadingText = document.getElementById("loading-text");
+    
+    loadingText.innerText = "Analyzing preferences...";
+    loadingText.style.opacity = 1;
+    
+    setTimeout(() => {
+        loadingText.style.opacity = 0;
+        setTimeout(() => {
+            loadingText.innerText = "Calculating estimates...";
+            loadingText.style.opacity = 1;
+        }, 300);
+    }, 900);
+    
+    setTimeout(() => {
+        loadingText.style.opacity = 0;
+        setTimeout(() => {
+            loadingText.innerText = "Ranking properties...";
+            loadingText.style.opacity = 1;
+        }, 300);
+    }, 1800);
+    
+    setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+        findMatches();
+    }, 2800);
+}
+
+// --- MASTER DATABASE ---
+const projects = [
+    // === UJJAIN HIGHWAY PLOTS ===
+    { name: "Shanti Vihar", type: "plot", rate: 4500, rera: "P-IND-22-3767", discFull: 0, purpose: ["residential"], status: "Ready to Move In (Families Living)", dist: 4.0, details: "4.0 km from Aurobindo. Magarkheda Road.", mpebRate: 150, plcPercent: { garden: 10, corner: 10, both: 15 } },
+    { name: "Highway Oasis", type: "plot", rate: 3775, rera: "N/A", discFull: 5, purpose: ["investment", "both"], status: "1-2 Years (Under Construction)", dist: 7.3, details: "7.3 km from Aurobindo. Bajrang Paliya, 2km from main road.", mpebRate: 175, plcFixed: { garden: 150, corner: 200, both: 200 } },
+    { name: "Highway Trident", type: "plot", rate: 2650, rera: "N/A", discFull: 5, purpose: ["investment"], status: "5+ Years out (Greenfield)", dist: 9.5, details: "9.5 km from Aurobindo. Near LBS University.", mpebRate: 175, plcFixed: { garden: 150, corner: 200, both: 200 } },
+    { name: "Shree Vidhya Vihar", type: "plot", rate: 3350, rera: "P-IND-25-5554", discFull: 0, purpose: ["investment", "residential", "both"], status: "3-4+ Years (Possession ~2027)", dist: 9.5, details: "9.5 km from Aurobindo. 2km from main road, LBS Univ Road.", mpebRate: 150, plcPercent: { garden: 10, corner: 10, both: 15 } },
+    { name: "Highway BLISS - 2", type: "plot", rate: 3950, rera: "P-OTH-24-5312", discFull: 5, purpose: ["residential", "both"], status: "1-2 Years (Under Construction)", dist: 9.8, details: "9.8 km from Aurobindo. Main road touch, near Dharampuri flyover.", mpebRate: 175, plcFixed: { garden: 150, corner: 200, both: 200 } },
+    { name: "HIGHWAY AURA", type: "plot", rate: 3400, rera: "P-IND-25-5350", discFull: 0, purpose: ["investment", "residential", "both"], status: "1-2 Years (Under Construction)", dist: 10.0, details: "10.0 km from Aurobindo. Ujjain Road, Dharampuri.", mpebRate: 175, plcFixed: { garden: 150, corner: 200, both: 200 } },
+    { name: "Highway Landmark", type: "plot", rate: 2975, rera: "P-OTH-25-5495", discFull: 5, purpose: ["investment", "residential", "both"], status: "1-2 Years (Under Construction)", dist: 11.0, details: "11.0 km from Aurobindo. Dharampuri area.", mpebRate: 175, plcFixed: { garden: 150, corner: 200, both: 200 } },
+    { name: "Highway Avenue", type: "plot", rate: 4399, rera: "P-IND-25-5344", discFull: 3, purpose: ["residential"], status: "Ready to Move In (No families yet)", dist: 13.0, details: "13.0 km from Aurobindo. Highway touch, end of Dharampuri flyover.", mpebRate: 175, plcFixed: { garden: 150, corner: 200, both: 200 } },
+    { name: "Highway Radiance", type: "plot", rate: 4299, rera: "P-OTH-26-6175", discFull: 3, purpose: ["investment", "residential", "both"], status: "1-2 Years (Under Construction)", dist: 16.0, details: "16.0 km from Aurobindo. Highway touch, Avenue extension.", mpebRate: 175, plcFixed: { garden: 150, corner: 200, both: 200 } },
+
+    // === AUROBINDO FLATS & COMMERCIAL ===
+    { name: "Mangla Classic and Desire", type: "flat", minBudget: 58, maxBudget: 77, rera: "Registered", purpose: ["residential", "both"], status: "Possession by Diwali 2026", details: "~1.5 km from SAIMS, Sankeshwar City", config: "2 & 3 BHKs", usp: "Every bedroom is a master bedroom! 7+ luxury amenities, massive construction guarantees (7yr leak, 2yr door)." },
+    { name: "Mangla Blossom", type: "flat", minBudget: 54.8, maxBudget: 54.8, rera: "Registered", purpose: ["residential", "both"], status: "Only 1 unit left!", details: "~1.5 km from SAIMS, near Mangla Classic", config: "2 BHK", usp: "No amenities, but a beautifully built, highly spacious apartment at an affordable rate." },
+    { name: "Orion Planet", type: "flat", minBudget: 38.71, maxBudget: 58.72, rera: "Registered", purpose: ["residential", "investment", "both"], status: "Available", details: "~1.2 km from SAIMS, Oriental University Road", config: "1 & 2 BHKs", usp: "7+ amenities including a spacious gym/pool. Excellent views of the Revati ranges from the terrace." },
+    { name: "Orion Sky", type: "flat", minBudget: 28, maxBudget: 28, rera: "Registered", purpose: ["residential", "investment", "both"], status: "Only 1 unit left!", details: "~1.2 km from SAIMS, Oriental University Road", config: "Compact 1 BHK", usp: "Truly compact, safe option perfect for a small family of 2-3 people. Features Revati range views." },
+    { name: "Divya Aureon", type: "flat", minBudget: 40, maxBudget: 1000, rera: "Registered", purpose: ["investment", "both"], status: "Under Construction", details: "~200m from SAIMS (Main Road Touch)", config: "Commercial Hub", usp: "Closest project to the anchor. Designed for offices/showrooms with grand commercial entrance + twin 12-story residential towers." }
+];
+
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(amount);
+}
+
+// 6-VARIABLE REASONING ENGINE 
+function generateDeepInsight(project, userInputs, math) {
+    let mismatchWarning = "";
+    let p1 = "", p2 = "", p3 = ""; 
+    const uPurpose = userInputs.purpose;
+    const uUrgency = userInputs.urgency;
+    const uFunding = userInputs.funding;
+    const uBudget = userInputs.budgetLakhs;
+    const uFamily = userInputs.familySize; 
+    const uSize = userInputs.size;
+
+    if (uPurpose === "residential" && !project.purpose.includes("residential")) {
+        mismatchWarning += `<p class="insight-para"><span class="warning-text">ðŸ›‘ NOT IDEAL FOR RESIDENTIAL:</span> Aapne strictly "Residential" (Ghar banana) select kiya hai, but yeh project purely ek investment/commercial focus asset hai. Yahan immediately family ke saath shift hona feasible ya best idea nahi hoga.</p>`;
+    } else if (uPurpose === "investment" && !project.purpose.includes("investment")) {
+        mismatchWarning += `<p class="insight-para"><span class="warning-text">ðŸ›‘ NOT IDEAL FOR ROI INVESTMENT:</span> Aapka goal pure "Investment" (High ROI) hai, par yeh completely ready aur mature residential project hai. Yahan initial capital appreciation slow hoga compared to raw or under-construction land.</p>`;
+    }
+
+    if (project.type === "flat") {
+        if (project.name === "Mangla Classic and Desire") {
+            p1 = (uFamily === "5+" || uFamily === "3-4") 
+                ? `<span class="success-text">Perfect Family Fit:</span> Aapki badi family ke hisaab se yeh perfect hai kyunki yahan har bedroom ek master bedroom haiâ€”parents ko compromise nahi karna padega.` 
+                : `Yeh ek premium luxury option hai. Har bedroom master hone ki wajah se privacy and comfort top-tier hai.`;
+            p2 = `Diwali 2026 possession aur massive construction guarantees (7 saal leakage, 2 saal doors) isko ek secure buy banati hain.`;
+        } 
+        else if (project.name === "Mangla Blossom") {
+            p1 = `Sirf 1 unit left hai! Agar aapko amenities (pool/gym) ka shauk nahi hai aur aapko purely bada space chahiye, toh yeh â‚¹54.80L mein ek steal deal hai.`;
+            p2 = `Mangla Classic ke bilkul paas hone se aapko same location premium milta hai but without the extra amenity costs.`;
+        }
+        else if (project.name === "Orion Planet") {
+            p1 = uPurpose === "investment" ? `Aurobindo se sirf 1.2km door hone ki wajah se yahan medical staff/students ka high rental yield assured hai.` : `7+ amenities aur Revati ranges ka view isko ek lifestyle upgrade banata hai.`;
+            p2 = `1 & 2 BHK options flexible budgets ke liye perfect hain.`;
+        }
+        else if (project.name === "Orion Sky") {
+            p1 = (uFamily === "1-2") 
+                ? `<span class="success-text">Smart Compact Living:</span> Aapki choti family ke liye yeh ek perfect, safe, aur compact option hai sirf â‚¹28 Lakhs mein.` 
+                : `Yeh ek highly compact unit hai. Agar aap purely ek safe, low-ticket asset dhund rahe hain toh ye best hai. Sirf 1 unit bachi hai!`;
+        }
+        else if (project.name === "Divya Aureon") {
+            p1 = `<span class="success-text">Prime Commercial Goldmine:</span> Aurobindo hospital se sirf 200m door hone ki wajah se yahan massive business aur rental demand rahegi.`;
+            p2 = `Offices ya showrooms plan karne ke liye yeh currently is stretch ka sabse grand under-construction project hai.`;
+        }
+    } 
+    else {
+        if (uFunding === "loan" && project.rera === "N/A") {
+            mismatchWarning += `<p class="insight-para"><span class="warning-text">âš ï¸ RERA Reality Check:</span> Aapne Bank Loan chuna hai, par yeh plot filhal RERA approved nahi hai. Yahan invest karne ke liye aapko cash-funding ki zarurat padegi ya RERA aane tak rukna hoga.</p>`;
+        } 
+        if (uPurpose === "residential" && uSize <= 800) {
+            mismatchWarning += `<p class="insight-para"><span class="warning-text">ðŸ“ Size Alert:</span> Aapne apna ghar banane ka goal bataya hai, but ${uSize} sqft ek compact plot hai. Ek proper standalone villa ke liye future mein space constrain feel ho sakta hai.</p>`;
+        }
+
+        if (project.name === "Shanti Vihar") {
+            if (uUrgency === "Immediate" && uPurpose !== "investment") {
+                p1 = `<span class="success-text">Ultimate Residential Match:</span> Sirf 4km ki doori aur 'Ready-to-Move' status ka matlab hai aap turant apna ghar bana kar shift ho sakte hain. SAIMS commute ke liye yeh sabse stress-free option hai.`;
+            } else {
+                p1 = `Kyunki yeh city limits ke bahut kareeb (4km) aur fully developed hai, yahan land ki initial price growth thodi slow hogi, but families ke liye rental ya resale demand hamesha premium rahegi.`;
+            }
+        } 
+        else if (project.name === "Highway Oasis") {
+            if (uUrgency === "Immediate") {
+                p1 = `<span class="warning-text">Timeline Compromise:</span> Aap turant plan kar rahe hain, par yahan possession mein 1-2 saal lagenge. Agar aap thoda ruk sakte hain, toh 7.3km par Bajrang Paliya link road ka massive connectivity advantage milega.`;
+            } else {
+                p1 = `7.3km ki doori isko ek smart geographical compromise banati hai. Bajrang Paliya link road aane wale time mein major artery banegi, making this an excellent 'Hold & Build' strategy.`;
+            }
+        }
+        else if (project.name === "Highway Trident") {
+            p1 = `<span class="success-text">Pure Greenfield Investment:</span> 9.5km aur 5+ saal ki maturity ka matlab hai rock-bottom entry price. Patient capital lagane par Ujjain corridor ka sabse high percentage ROI yahin milega.`;
+            p2 = `LBS University ke directly paas hone se future education hub ki heavy demand is zone ko automatically support karegi.`;
+        }
+        else if (project.name === "Shree Vidhya Vihar") {
+            p1 = `3-4 saal ki possession timeline isko unke liye perfect banati hai jo abhi lower pre-maturity rates par capital lock karke future family home plan kar rahe hain.`;
+            p2 = `LBS University road access ki wajah se yahan families ke liye future infrastructure aur appreciation dono bahut strong rahenge.`;
+        }
+        else if (project.name === "Highway BLISS - 2" || project.name === "HIGHWAY AURA") {
+            if (uPurpose === "both") {
+                p1 = `<span class="success-text">The Perfect Hybrid Play:</span> ~10km belt aur 1-2 saal ka timeline 'Hold & Build' strategy ke liye absolute sweet spot hai. Aaj budget mein aayega, kal city ka part lagega.`;
+            } else {
+                p1 = `Main Ujjain road aur Dharampuri flyover ki direct visibility is asset ko highly liquid banati hai, jo resale ke time sabse bada advantage hoga.`;
+            }
+        }
+        else if (project.name === "Highway Landmark") {
+            p1 = `11km par â‚¹2975/sqft ek 'Steal Deal' hai. Agar aap thoda deep-corridor commute kar sakte hain, toh lower budget mein aapko kaafi premium size ka plot mil jayega jisme future growth assured hai.`;
+        }
+        else if (project.name === "Highway Avenue") {
+            p1 = `13km door hone ke bawajood yeh perfectly ready-to-move premium infrastructure hai. Yeh ek early-adopter play haiâ€”aaj thodi doori bardasht karein aur kal ka elite highway-touch asset secure karein.`;
+        }
+        else if (project.name === "Highway Radiance") {
+            p1 = `16km deep-corridor hone se yeh purely ek long-term investment game hai. Jab Ujjain highway ka 6-lane expansion mature hoga, sabse zyada valuation spike isi specific belt mein capture hoga.`;
+        }
+    }
+
+    let totalLakhs = parseFloat(math.totalLakhs);
+    if (uBudget === 1000) {
+        if (totalLakhs >= 60) {
+            p3 = `<span class="success-text">Premium Portfolio Fit:</span> Aapke open budget ke mutabiq, yeh â‚¹${totalLakhs}L ka premium asset aapke portfolio mein ek strong long-term addition banega.`;
+        } else if (totalLakhs >= 40) {
+            p3 = `<span class="success-text">Smart Capital Allocation:</span> Aapka budget constraint-free hai, aur yeh option sirf â‚¹${totalLakhs}L mein ek excellent value-for-money asset deliver kar raha hai.`;
+        } else {
+            p3 = `<span class="success-text">High Liquidity Advantage:</span> Open budget hone ke bawajood, yeh â‚¹${totalLakhs}L ka asset kaafi under-valued entry point de raha hai. Bacha hua massive capital aap construction ya multiple investments mein use kar sakte hain.`;
+        }
+    } else if (totalLakhs <= uBudget) {
+        let savings = (uBudget - totalLakhs).toFixed(2);
+        if (savings > 5) {
+            p3 = `<span class="success-text">Financially Highly Optimized:</span> Yeh aapke â‚¹${uBudget}L budget bracket ke andar bahut easily fit hai. Aapke paas approx â‚¹${savings} Lakhs ka surplus bachega jise aap future development mein laga sakte hain.`;
+        } else if (savings > 0) {
+            p3 = `<span class="success-text">Budget Fit:</span> Yeh perfectly aapke â‚¹${uBudget}L ki limit mein set ho raha hai, leaving a buffer of â‚¹${savings} Lakhs.`;
+        } else {
+            p3 = `<span class="success-text">Exact Budget Match:</span> Yeh option aapki â‚¹${uBudget}L ki limit ko perfectly maximize kar raha hai without over-extending.`;
+        }
+    } else {
+        let diff = (totalLakhs - uBudget).toFixed(2);
+        p3 = `<span class="warning-text">Budget Extension Alert:</span> Current rates aur taxes milakar yeh aapke budget se lagbhag â‚¹${diff} Lakhs upar ja raha hai. Is specific option ke liye funding strategy thodi adjust karni hogi.`;
+    }
+
+    let finalInsight = mismatchWarning;
+    if(p1) finalInsight += `<p class="insight-para">${p1}</p>`;
+    if(p2) finalInsight += `<p class="insight-para">${p2}</p>`;
+    if(p3) finalInsight += `<p class="insight-para">${p3}</p>`;
+    return finalInsight;
 }
 
 function toggleAccordion(btn) {
     const content = btn.nextElementSibling;
-    if(content.style.display === "block") {
+    if (content.style.display === "block") {
         content.style.display = "none";
-        btn.innerHTML = `View Full Estimate & Analysis <span>+</span>`;
+        btn.innerHTML = "View Full Estimate & Analysis <span>+</span>";
     } else {
         content.style.display = "block";
-        btn.innerHTML = `Hide Estimate <span>-</span>`;
+        btn.innerHTML = "Hide Details <span>âˆ’</span>";
     }
 }
 
 function findMatches() {
-    document.getElementById("quiz").style.display = "none";
-    document.getElementById("loading").style.display = "flex";
+    const userName = document.getElementById('userName').value || "Client";
+    const userPhone = document.getElementById('userPhone').value || "Not Provided";
     
-    // Fade out the logo when loading starts
-    document.getElementById('brand-logo').style.opacity = '0';
-    document.getElementById('brand-logo').style.pointerEvents = 'none';
+    const uUrgencyEl = document.querySelector('input[name="urgency"]:checked');
+    const userUrgency = uUrgencyEl ? uUrgencyEl.value : "Immediate";
+    
+    const uPropTypeEl = document.querySelector('input[name="propType"]:checked');
+    const userPropType = uPropTypeEl ? uPropTypeEl.value : "plot";
+    
+    const uPurposeEl = document.querySelector('input[name="purpose"]:checked');
+    const userPurpose = uPurposeEl ? uPurposeEl.value : "residential";
+    
+    let userFamily = "N/A";
+    if (activeStepsList.includes(6) && document.querySelector('input[name="familySize"]:checked')) {
+        userFamily = document.querySelector('input[name="familySize"]:checked').value;
+    }
+    
+    let userSize = 1000;
+    let userPref = "none";
+    if (userPropType === 'plot') {
+        const sizeEl = document.querySelector('input[name="size"]:checked');
+        if (sizeEl) userSize = parseInt(sizeEl.value);
+        
+        const prefEl = document.querySelector('input[name="preference"]:checked');
+        if (prefEl) userPref = prefEl.value;
+    }
+    
+    const fundingEl = document.querySelector('input[name="funding"]:checked');
+    const userFunding = fundingEl ? fundingEl.value : "cash";
+    
+    const budgetEl = document.querySelector('input[name="budget"]:checked');
+    const userBudgetLakhs = budgetEl ? parseInt(budgetEl.value) : 1000;
+    
+    const userInputs = { urgency: userUrgency, propType: userPropType, purpose: userPurpose, familySize: userFamily, size: userSize, pref: userPref, funding: userFunding, budgetLakhs: userBudgetLakhs };
 
-    let phase = 0;
-    const loadText = document.getElementById("loading-text");
-    const loadInterval = setInterval(() => {
-        loadText.innerText = loadingPhases[phase];
-        phase++;
-        if(phase >= loadingPhases.length) clearInterval(loadInterval);
-    }, 600);
+    let sheetPropType = userPropType === "plot" ? "Plot / Land" : "Flat / Commercial";
+    let sheetPurpose = userPurpose === "residential" ? "Residential" : (userPurpose === "investment" ? "Investment" : "Both (Hold & Build)");
+    let sheetPref = "Standard Plot";
+    if(userPropType === 'plot') {
+        if (userPref === "garden") sheetPref = "Garden Facing";
+        else if (userPref === "corner") sheetPref = "Corner Plot";
+        else if (userPref === "both") sheetPref = "Corner + Garden";
+    } else { sheetPref = "N/A (Flat)"; userSize = "N/A"; }
+    
+    let sheetFunding = userFunding === "cash" ? "Full Cash" : "Bank Loan";
+    let sheetBudget = "Above 60 Lakhs";
+    if (userBudgetLakhs === 25) sheetBudget = "Under 25 Lakhs";
+    else if (userBudgetLakhs === 40) sheetBudget = "25 - 40 Lakhs";
+    else if (userBudgetLakhs === 60) sheetBudget = "40 - 60 Lakhs";
 
-    setTimeout(() => {
-        document.getElementById("loading").style.display = "none";
-        const container = document.getElementById("results-container");
-        container.innerHTML = "";
+    const googleSheetURL = "https://script.google.com/macros/s/AKfycbzO2B_ujncadVnNJQx9YJBl6CVO1sbsc5hbC5XXFNed9nEmxRVeFX-hqL18q1jgtZ0LvA/exec"; 
+    const urlWithParams = `${googleSheetURL}?name=${encodeURIComponent(userName)}&phone=${encodeURIComponent(userPhone)}&urgency=${encodeURIComponent(userUrgency)}&propertyType=${encodeURIComponent(sheetPropType)}&purpose=${encodeURIComponent(sheetPurpose)}&familySize=${encodeURIComponent(userFamily)}&size=${encodeURIComponent(userSize)}&preference=${encodeURIComponent(sheetPref)}&funding=${encodeURIComponent(sheetFunding)}&budget=${encodeURIComponent(sheetBudget)}`;
+    
+    fetch(urlWithParams, { mode: 'no-cors' }).catch(err => console.log('Network payload sent.'));
 
-        document.getElementById("res_name").innerText = userPreferences.name.toUpperCase();
-        document.getElementById("res_purpose").innerText = userPreferences.purpose.toUpperCase();
-        document.getElementById("res_type").innerText = userPreferences.prop_type.toUpperCase();
-        document.getElementById("res_budget").innerText = userPreferences.budget == 60 ? "₹60L+" : "₹" + userPreferences.budget + "L";
-        document.getElementById("res_phone").innerText = userPreferences.phone;
+    let filteredProjects = projects.filter(p => p.type === userPropType);
+    let scoredProjects = filteredProjects.map(project => {
+        let score = 0;
+        let math = {};
+        let gapAmount = 0;
 
-        let scoredProjects = projects.map(p => {
-            const res = calculateScore(p);
-            return { ...p, score: res.score, math: res.mathBreakdown, dynamicInsight: res.dynamicInsight };
-        });
+        if (project.type === "plot") {
+            let mpebCost = project.mpebRate * userSize;
+            let baseCost = project.rate * userSize;
+            let prefCost = 0;
+            let prefName = "Standard Plot";
 
-        scoredProjects = scoredProjects.filter(p => p.score > -900).sort((a, b) => b.score - a.score).slice(0, 3);
+            if (userPref === "garden") {
+                if (project.plcPercent) { prefCost = baseCost * (project.plcPercent.garden / 100); prefName = `Garden Facing (+${project.plcPercent.garden}%)`; } 
+                else { prefCost = project.plcFixed.garden * userSize; prefName = `Garden Facing (+â‚¹${project.plcFixed.garden}/sqft)`; }
+            } else if (userPref === "corner") {
+                if (project.plcPercent) { prefCost = baseCost * (project.plcPercent.corner / 100); prefName = `Corner Plot (+${project.plcPercent.corner}%)`; } 
+                else { prefCost = project.plcFixed.corner * userSize; prefName = `Corner Plot (+â‚¹${project.plcFixed.corner}/sqft)`; }
+            } else if (userPref === "both") {
+                if (project.plcPercent) { prefCost = baseCost * (project.plcPercent.both / 100); prefName = `Corner + Garden (+${project.plcPercent.both}%)`; } 
+                else { prefCost = project.plcFixed.both * userSize; prefName = `Corner + Garden (+â‚¹${project.plcFixed.both}/sqft)`; }
+            }
+            
+            let discountPct = project.discFull;
+            let discountValue = (baseCost + prefCost) * (discountPct / 100);
+            let finalLandValue = (baseCost + prefCost) - discountValue;
+            let registryCost = finalLandValue * 0.105; 
+            
+            let grandTotal = finalLandValue + mpebCost + registryCost;
+            let grandTotalLakhs = grandTotal / 100000;
+            gapAmount = grandTotalLakhs - userBudgetLakhs;
+            
+            math = { isPlot: true, base: baseCost, pref: prefCost, mpeb: mpebCost, disc: discountValue, discPct: discountPct, reg: registryCost, totalLakhs: grandTotalLakhs.toFixed(2), prefName: prefName, appliedMpebRate: project.mpebRate };
 
-        if (scoredProjects.length === 0) {
-            container.innerHTML = "<p>Please adjust your budget or property type to see matches.</p>";
-            document.getElementById("results").style.display = "block";
-            return;
+            if (userBudgetLakhs === 1000) score += 100;
+            else if (gapAmount <= 0) score += 100;
+            else score += Math.max(-150, 100 - (15 * gapAmount));
+
+            if (userFunding === "loan" && project.rera === "N/A") score -= 200;
+            if (userFunding === "cash" && project.rera === "N/A") score += 20;
+            if (userUrgency === "Immediate" && project.status.includes("5+ Years")) score -= 50;
+            if (userUrgency === "Immediate" && project.status.includes("Ready")) score += 30;
+            if (userUrgency === "6+ Months" && project.status.includes("5+ Years")) score += 20;
+            if (userPurpose === "residential" && !project.purpose.includes("residential")) score -= 100;
+            if (userPurpose === "investment" && !project.purpose.includes("investment")) score -= 100;
+            if (userPurpose === "residential" && project.purpose.includes("residential") && userSize > 800) score += 15;
+            if (userPurpose === "investment" && project.purpose.includes("investment")) score += 15;
+            if (userPurpose === "both" && project.purpose.includes("both")) score += 20;
+
+        } else if (project.type === "flat") {
+            gapAmount = project.minBudget - userBudgetLakhs;
+            math = { isPlot: false, totalLakhs: project.minBudget.toFixed(2) };
+
+            if (userBudgetLakhs === 1000) score += 100;
+            else if (gapAmount <= 0) score += 100;
+            else score += Math.max(-150, 100 - (10 * gapAmount)); 
+
+            if (userPurpose === "residential" && !project.purpose.includes("residential")) score -= 100;
+            if (userPurpose === "investment" && !project.purpose.includes("investment")) score -= 100;
+
+            let fam = userFamily;
+            if ((fam === "5+" || fam === "3-4") && project.name === "Mangla Classic and Desire") score += 50;
+            if (fam === "1-2" && project.name === "Orion Sky") score += 50;
+            if (userPurpose === "investment" && project.name === "Divya Aureon") score += 50;
         }
 
-        let delayBase = 0;
-        scoredProjects.forEach((match, index) => {
-            let badgeClass = match.score > 80 ? 'match-badge' : 'match-badge good';
-            let badgeText = match.score > 80 ? '98% Match' : '85% Match';
-            if(index === 0 && match.score > 80) badgeText = 'Top Recommendation';
+        let generatedInsight = generateDeepInsight(project, userInputs, math);
+        let fundingLabel = userFunding === "cash" ? "Full Cash" : "Bank Finance";
 
-            let hiddenMathBreakdown = "";
-            if (match.type === "plot") {
-                hiddenMathBreakdown = `
-                    <div style="background:#f5f5f7; padding:12px; border-radius:8px; margin-bottom:12px;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Assumed Size:</span> <strong>${match.math.size} sqft</strong></div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Effective Rate:</span> <strong>₹${match.math.rate}/sqft</strong></div>
-                        <div style="display:flex; justify-content:space-between;"><span>MPEB/Water:</span> <strong>₹${match.math.mpeb}</strong></div>
-                    </div>`;
+        return { ...project, score: score, dynamicInsight: generatedInsight, fundingLabel: fundingLabel, gapAmount: gapAmount > 0 ? gapAmount : 0, math: math };
+    });
+
+    scoredProjects.sort((a, b) => b.score - a.score);
+    
+    const container = document.getElementById("results-container");
+    container.innerHTML = "";
+
+    let delayBase = 0;
+
+    // --- 1. RENDER CENTURION BLACK CARD FIRST ---
+    let cardDataHTML = `
+        <div class="card-data-item"><span class="card-data-label">Type</span><span class="card-data-value">${sheetPropType}</span></div>
+        <div class="card-data-item"><span class="card-data-label">Goal</span><span class="card-data-value">${sheetPurpose}</span></div>
+        <div class="card-data-item"><span class="card-data-label">Timeline</span><span class="card-data-value">${userUrgency}</span></div>
+    `;
+    if (activeStepsList.includes(6) && userFamily !== "N/A") {
+        cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Family</span><span class="card-data-value">${userFamily}</span></div>`;
+    }
+    if (userPropType === 'plot') {
+        cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Size</span><span class="card-data-value">${userSize} SQFT</span></div>`;
+        if (userPref !== "none") cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Premium</span><span class="card-data-value">${sheetPref}</span></div>`;
+    }
+    cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Funding</span><span class="card-data-value">${sheetFunding}</span></div>`;
+    cardDataHTML += `<div class="card-data-item"><span class="card-data-label">Budget</span><span class="card-data-value">${sheetBudget}</span></div>`;
+
+    container.innerHTML += `
+        <div class="black-card result-animate" style="animation-delay: ${delayBase}s">
+            <div class="card-top">
+                <div class="card-top-left">
+                    <div class="card-chip"></div>
+                    <h2 class="card-name">${userName}</h2>
+                </div>
+                <div class="card-title">Client Blueprint</div>
+            </div>
+            <div class="card-data-grid">
+                ${cardDataHTML}
+            </div>
+            <div class="card-footer">
+                <p class="card-phone">${userPhone}</p>
+            </div>
+        </div>
+    `;
+    
+    delayBase += 0.25; 
+
+    // --- 2. RENDER THE "YOUR MATCHES" HEADER ---
+    container.innerHTML += `
+        <div class="header result-animate" style="animation-delay: ${delayBase}s">
+            <h1 id="results-title">Your Matches</h1>
+            <p>Ranked strictly on your unique parameters</p>
+        </div>
+    `;
+    
+    delayBase += 0.20;
+
+    // --- 3. RENDER GLOBAL WARNING (IF APPLICABLE) ---
+    if (userBudgetLakhs !== 1000 && scoredProjects.length > 0 && scoredProjects[0].gapAmount > 5) {
+        container.innerHTML += `
+            <div class="global-warning result-animate" style="animation-delay: ${delayBase}s">
+                <h3>âš ï¸ Budget Extension Required</h3>
+                <p>There are currently no options strictly under ${userBudgetLakhs} Lakhs for your exact parameters. We have ranked the closest possible options below.</p>
+            </div>
+        `;
+        delayBase += 0.25;
+    }
+
+    // --- 4. RENDER PROJECT CARDS STAGGERED ---
+    scoredProjects.forEach((match, index) => {
+        let badgeClass = index === 0 ? "rank-badge top-rank" : "rank-badge";
+        let badgeText = index === 0 ? "Top Match" : `Match #${index + 1}`;
+
+        let budgetAlertUI = "";
+        if (userBudgetLakhs !== 1000) {
+            if (match.gapAmount > 5) {
+                budgetAlertUI = `<div style="color: var(--error); font-size: 13px; font-weight: 600; margin-top: 8px;">Approx â‚¹${match.gapAmount.toFixed(2)}L above budget</div>`;
+            } else if (match.gapAmount > 0) {
+                budgetAlertUI = `<div style="color: #b45309; font-size: 13px; font-weight: 600; margin-top: 8px;">Slightly above budget by â‚¹${match.gapAmount.toFixed(2)}L</div>`;
             }
+        }
 
-            let waMessage = `Hi Ronak, this is ${userPreferences.name}. I am interested in ${match.name}. Please share more details and live inventory.`;
-            let waLink = `https://wa.me/919876543210?text=${encodeURIComponent(waMessage)}`;
+        let hiddenMathBreakdown = "";
+        let subHeroText = "";
 
-            // Elegant native image component inside the card
-            let imageHtml = match.imgUrl ? `
-                <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 12px; margin-bottom: 16px; background: #e5e5ea;">
-                    <img src="${match.imgUrl}" alt="${match.name}" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>` : '';
-
-            container.innerHTML += `
-                <div class="project-card" style="animation-delay: ${delayBase}s">
-                    <div class="card-header">
-                        <h2>${match.name}</h2>
-                        <div class="${badgeClass}">${badgeText}</div>
-                    </div>
-                    
-                    ${imageHtml}
-                    
-                    <h3 class="hero-price">₹${match.math.totalLakhs} Lakhs</h3>
-                    
-                    <div class="specs-grid">
-                        <div class="spec-item">
-                            <span class="spec-label">Status</span>
-                            <span class="spec-value">${match.status}</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">RERA</span>
-                            <span class="spec-value" style="font-size:11px;">${match.rera}</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Ideal For</span>
-                            <span class="spec-value">${match.bestFor}</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Funding</span>
-                            <span class="spec-value">${userPreferences.funding === 'cash' ? 'Self/Cash' : 'Bank Loan'}</span>
-                        </div>
-                    </div>
-
-                    <a href="${waLink}" target="_blank" class="wa-action" style="margin-bottom: 16px;">
-                        Contact for Details
-                    </a>
-
-                    <button class="accordion-btn" onclick="toggleAccordion(this)">
-                        View Full Estimate & Analysis <span>+</span>
-                    </button>
-                    <div class="accordion-content">
-                        ${hiddenMathBreakdown}
-                        <div class="insight-box">
-                            <span class="insight-title" style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 13px; display: block; margin-bottom: 8px;">Consultant's Analysis</span>
-                            ${match.dynamicInsight}
-                        </div>
-                    </div>
+        if (match.math.isPlot) {
+            subHeroText = `${userSize} SqFt Plot`;
+            let prefRow = userPref !== "none" ? `<div class="math-line"><span>${match.math.prefName}</span> <span>â‚¹${formatCurrency(match.math.pref)}</span></div>` : ``;
+            let discRow = match.math.discPct > 0 ? `<div class="math-line discount-text"><span>Discount (${match.math.discPct}%)</span> <span>- â‚¹${formatCurrency(match.math.disc)}</span></div>` : ``;
+            
+            hiddenMathBreakdown = `
+                <div style="margin-bottom: 20px;">
+                    <div class="math-line"><span>Plot Base Value</span> <span>â‚¹${formatCurrency(match.math.base)}</span></div>
+                    ${prefRow}
+                    ${discRow}
+                    <div class="math-line"><span>MPEB Charge (â‚¹${match.math.appliedMpebRate}/sqft)</span> <span>â‚¹${formatCurrency(match.math.mpeb)}</span></div>
+                    <div class="math-line"><span>Govt. Registry (10.5%)</span> <span>â‚¹${formatCurrency(match.math.reg)}</span></div>
+                    <div class="math-line math-total"><span>Total Estimate</span> <span>â‚¹${match.math.totalLakhs} Lakhs</span></div>
                 </div>
             `;
-            
-            delayBase += 0.25; 
-        });
+        } else {
+            subHeroText = `${match.config}`;
+            hiddenMathBreakdown = `
+                <div style="margin-bottom: 20px; font-size: 14.5px; color: var(--text-main); line-height: 1.5;">
+                    <strong>Property USP:</strong> ${match.usp}
+                </div>
+            `;
+        }
 
-        document.getElementById("quiz").style.display = "none";
-        document.getElementById("results").style.display = "block";
-        window.scrollTo(0, 0);
-    }, 2000); 
+        let waMessage = encodeURIComponent(`Hi Ronak, this is ${userName}. I am interested in ${match.name}. Please share more details and live inventory.`);
+        let waLink = `https://wa.me/918103423011?text=${waMessage}`;
+
+        container.innerHTML += `
+            <div class="project-card result-animate" style="animation-delay: ${delayBase}s">
+                <div class="card-header">
+                    <h2>${match.name}</h2>
+                    <div class="${badgeClass}">${badgeText}</div>
+                </div>
+                
+                <h3 class="hero-price">â‚¹${match.math.totalLakhs} Lakhs</h3>
+                <p class="hero-sub">${subHeroText} ${budgetAlertUI}</p>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Location</span>
+                        <span class="spec-value">${match.details}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Status</span>
+                        <span class="spec-value">${match.status}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">RERA</span>
+                        <span class="spec-value">${match.rera}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Funding</span>
+                        <span class="spec-value">${match.fundingLabel}</span>
+                    </div>
+                </div>
+
+                <a href="${waLink}" target="_blank" class="wa-action" style="margin-bottom: 16px;">
+                    Contact for Details
+                </a>
+
+                <button class="accordion-btn" onclick="toggleAccordion(this)">
+                    View Full Estimate & Analysis <span>+</span>
+                </button>
+                <div class="accordion-content">
+                    ${hiddenMathBreakdown}
+                    <div class="insight-box">
+                        <span class="insight-title" style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 13px; display: block; margin-bottom: 8px;">Consultant's Analysis</span>
+                        ${match.dynamicInsight}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        delayBase += 0.25; 
+    });
+
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("results").style.display = "block";
+    window.scrollTo(0, 0);
 }
 
-// --- 🪄 RESET APP FUNCTION ---
 function resetApp() {
     currentStepID = 1;
     document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-    document.getElementById("q_name").value = "";
-    document.getElementById("q_phone").value = "";
     renderStep();
     document.getElementById("results").style.display = "none";
     document.getElementById("quiz").style.display = "block";
     window.scrollTo(0, 0);
-    
-    // Bring the logo back for a new session
-    document.getElementById('brand-logo').style.opacity = '1';
-    document.getElementById('brand-logo').style.pointerEvents = 'auto';
-    
-    // Remove quiz active state to push layout back down 
-    document.body.classList.remove('quiz-active');
-    document.getElementById('brand-logo').classList.remove('quiz-mode');
-    
-    // Restore landing page view
-    const landingPage = document.getElementById('landing-page');
-    landingPage.style.display = 'flex';
-    setTimeout(() => {
-        landingPage.style.opacity = '1';
-    }, 50);
-}
-
-// --- 🪄 LANDING PAGE TRANSITION ANIMATION ---
-function startAssessment() {
-    const landingPage = document.getElementById('landing-page');
-    const logo = document.getElementById('brand-logo');
-    const quizSection = document.getElementById('quiz');
-
-    // 1. Instantly trigger the fluid logo movement
-    logo.classList.add('quiz-mode');
-    document.body.classList.add('quiz-active');
-
-    // 2. Beautifully fade out the entire landing page
-    landingPage.style.opacity = '0';
-    
-    // 3. Reveal the quiz underneath while the landing page melts away
-    quizSection.style.display = 'block';
-    setTimeout(() => {
-        quizSection.style.opacity = '1';
-    }, 50);
-
-    // 4. Once the 0.8-second fade is completely done, destroy the invisible layout so you can click freely
-    setTimeout(() => {
-        landingPage.style.display = 'none';
-    }, 800);
 }
 </script>
 </body>
