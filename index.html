@@ -22,6 +22,11 @@
             z-index: 1;
             transition: opacity 0.8s ease;
         }
+        /* Add this to allow the logo to scroll naturally in results mode */
+#brand-logo.results-mode {
+    position: absolute !important;
+    top: 30px !important; /* Adjust as needed for the top of the results page */
+}
         
         /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
         #brand-logo {
@@ -923,9 +928,14 @@ function toggleAccordion(btn) {
 }
 
 function findMatches() {
-    // 👈 Fade out the logo when results are populating
-    document.getElementById('brand-logo').style.opacity = '0';
-    document.getElementById('brand-logo').style.pointerEvents = 'none';
+    const logo = document.getElementById('brand-logo');
+    
+    // Switch from fixed position to scrollable position
+    logo.classList.remove('quiz-mode');
+    logo.classList.add('results-mode');
+    
+    logo.style.opacity = '1';
+    logo.style.pointerEvents = 'auto';
 
     const userName = document.getElementById('userName').value || "Client";
     const userPhone = document.getElementById('userPhone').value || "Not Provided";
