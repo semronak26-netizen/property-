@@ -2,15 +2,147 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shivalay Infratech | Premium Real Estate Matchmaker</title>
-
-    <meta name="description"
-          content="Hum bharose ko pyaar se bunte hain, tabhi log humein chunte hain. Take our personalized assessment to find your ideal property along the Indore-Ujjain corridor.">
+    <meta name="description" content="Hum bharose ko pyaar se bunte hain, tabhi log humein chunte hain. Take our personalized assessment to find your ideal property along the Indore-Ujjain corridor.">
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+        
+        /* 💎 SHIVALAY LANDING PAGE STYLES */
+        .landing-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 1;
+            transition: opacity 0.8s ease;
+        }
+        
+        /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
+        #brand-logo {
+            position: fixed;
+            top: 15vh;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+            z-index: 1001; 
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
+        }
+
+        /* The Magic Logo Transition State */
+        #brand-logo.quiz-mode {
+            top: 16px;
+            height: 45px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05));
+        }
+
+        /* 💎 SHIVALAY LANDING PAGE STYLES */
+        #landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('images/lander.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: opacity 0.8s ease;
+        }
+
+        .landing-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            padding: calc(15vh + 100px) 24px 4vh 24px; 
+        }
+
+        body.quiz-active { padding-top: 90px; }
+        
+        .landing-text {
+            margin-top: 4vh;
+            transition: opacity 0.4s ease;
+        }
+
+        .eyebrow {
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .main-tagline {
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            font-size: 32px;
+            line-height: 1.3;
+            font-style: italic;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
+
+        .sub-text {
+            color: rgba(255,255,255,0.85);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .landing-action {
+            margin-top: auto; 
+            width: 100%;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-start {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 18px 32px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 8px 32px rgba(255,255,255,0.2); }
+            100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        }
+
+        .legal-microcopy {
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            margin-top: 16px;
+            line-height: 1.4;
+        }
+        
         :root {
             /* Apple Design System Colors */
             --primary: #1d1d1f; 
@@ -211,7 +343,7 @@
             border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;
         }
 
-        /* Embossed Name styling - Now 18px and positioned under the chip */
+        /* Embossed Name styling */
         .card-name { font-size: 18px; font-weight: 600; margin: 0; letter-spacing: 2px; text-transform: uppercase; color: #e5e5ea; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); line-height: 1;}
         .card-phone { font-size: 13px; color: #86868b; margin: 0; font-weight: 500; letter-spacing: 1.5px; }
 
@@ -297,20 +429,26 @@
     </style>
 </head>
 <body>
+    <img id="brand-logo" src="images/shivalay-logo.png" alt="Shivalay Infratech">
 
-<div class="container">
-    <div id="quiz">
-                <div class="header">
-            <img src="images/shivalay-logo.png" 
-     alt="Company Logo" 
-     style="height: 65px; width: auto; margin-bottom: 16px; object-fit: contain;">
+    <div id="landing-page">
+        <div class="landing-overlay"></div>
+        <div class="landing-content">
+            
+            <div class="landing-text" id="landing-text">
+                <div class="eyebrow">SHIVALAY INFRATECH PRESENTS</div>
+                <h1 class="main-tagline">"Hum bharose ko pyaar se bunte hain, tabhi log humein chunte hain."</h1>
+                <p class="sub-text">Indore-Ujjain highway par aapke sapno ki property aur smart investment dhoondhne ka ek personalized tareeqa.</p>
+            </div>
 
-                 
-            <h1>Find Your Ideal Property</h1>
-            <p>Personalized recommendations based on your budget and goals</p>
+            <div class="landing-action" id="landing-action">
+                <button class="btn-start" onclick="startAssessment()">Start Assessment</button>
+                <p class="legal-microcopy">Aapki privacy humari priority hai. 'Start Assessment' par click karke, aap apni property preferences Shivalay Infratech ki team ke sath secure roop se share karne ki anumati dete hain.</p>
+            </div>
         </div>
+    </div>
 
-
+    <div class="container" id="quiz" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
         <div class="progress-container">
             <div class="progress-fill" id="progress-fill"></div>
         </div>
@@ -351,27 +489,6 @@
                         <div class="tile-content">
                             <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             <span class="tile-text">6+ Months</span><span class="tile-subtext">Researching</span>
-                        </div>
-                    </label>
-                </div>
-            </div>
-
-            <div class="q-block step-container" id="step-4">
-                <div class="q-title">Aap kis tarah ki property dekh rahe hain?</div>
-                <p class="q-subtitle">Zameen lekar ghar banana hai, ya bani-banayi property chahiye?</p>
-                <div class="tile-grid col-2">
-                    <label class="tile">
-                        <input type="radio" name="propType" value="plot" onclick="handleAutoAdvance()">
-                        <div class="tile-content">
-                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                            <span class="tile-text">Plot / Land</span><span class="tile-subtext">Ujjain Highway</span>
-                        </div>
-                    </label>
-                    <label class="tile">
-                        <input type="radio" name="propType" value="flat" onclick="handleAutoAdvance()">
-                        <div class="tile-content">
-                            <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/></svg>
-                            <span class="tile-text">Flat / Commercial</span><span class="tile-subtext">Aurobindo Hub</span>
                         </div>
                     </label>
                 </div>
@@ -508,7 +625,6 @@
         <div id="results-container"></div>
         <button class="secondary-btn" onclick="resetApp()">Start New Search</button>
     </div>
-</div>
 
 <script>
 // --- TYPEFORM-STYLE WIZARD LOGIC ---
@@ -682,20 +798,20 @@ function generateDeepInsight(project, userInputs, math) {
     const uSize = userInputs.size;
 
     if (uPurpose === "residential" && !project.purpose.includes("residential")) {
-        mismatchWarning += `<p class="insight-para"><span class="warning-text">ðŸ›‘ NOT IDEAL FOR RESIDENTIAL:</span> Aapne strictly "Residential" (Ghar banana) select kiya hai, but yeh project purely ek investment/commercial focus asset hai. Yahan immediately family ke saath shift hona feasible ya best idea nahi hoga.</p>`;
+        mismatchWarning += `<p class="insight-para"><span class="warning-text">🛑 NOT IDEAL FOR RESIDENTIAL:</span> Aapne strictly "Residential" (Ghar banana) select kiya hai, but yeh project purely ek investment/commercial focus asset hai. Yahan immediately family ke saath shift hona feasible ya best idea nahi hoga.</p>`;
     } else if (uPurpose === "investment" && !project.purpose.includes("investment")) {
-        mismatchWarning += `<p class="insight-para"><span class="warning-text">ðŸ›‘ NOT IDEAL FOR ROI INVESTMENT:</span> Aapka goal pure "Investment" (High ROI) hai, par yeh completely ready aur mature residential project hai. Yahan initial capital appreciation slow hoga compared to raw or under-construction land.</p>`;
+        mismatchWarning += `<p class="insight-para"><span class="warning-text">🛑 NOT IDEAL FOR ROI INVESTMENT:</span> Aapka goal pure "Investment" (High ROI) hai, par yeh completely ready aur mature residential project hai. Yahan initial capital appreciation slow hoga compared to raw or under-construction land.</p>`;
     }
 
     if (project.type === "flat") {
         if (project.name === "Mangla Classic and Desire") {
             p1 = (uFamily === "5+" || uFamily === "3-4") 
-                ? `<span class="success-text">Perfect Family Fit:</span> Aapki badi family ke hisaab se yeh perfect hai kyunki yahan har bedroom ek master bedroom haiâ€”parents ko compromise nahi karna padega.` 
+                ? `<span class="success-text">Perfect Family Fit:</span> Aapki badi family ke hisaab se yeh perfect hai kyunki yahan har bedroom ek master bedroom hai—parents ko compromise nahi karna padega.` 
                 : `Yeh ek premium luxury option hai. Har bedroom master hone ki wajah se privacy and comfort top-tier hai.`;
             p2 = `Diwali 2026 possession aur massive construction guarantees (7 saal leakage, 2 saal doors) isko ek secure buy banati hain.`;
         } 
         else if (project.name === "Mangla Blossom") {
-            p1 = `Sirf 1 unit left hai! Agar aapko amenities (pool/gym) ka shauk nahi hai aur aapko purely bada space chahiye, toh yeh â‚¹54.80L mein ek steal deal hai.`;
+            p1 = `Sirf 1 unit left hai! Agar aapko amenities (pool/gym) ka shauk nahi hai aur aapko purely bada space chahiye, toh yeh ₹54.80L mein ek steal deal hai.`;
             p2 = `Mangla Classic ke bilkul paas hone se aapko same location premium milta hai but without the extra amenity costs.`;
         }
         else if (project.name === "Orion Planet") {
@@ -704,7 +820,7 @@ function generateDeepInsight(project, userInputs, math) {
         }
         else if (project.name === "Orion Sky") {
             p1 = (uFamily === "1-2") 
-                ? `<span class="success-text">Smart Compact Living:</span> Aapki choti family ke liye yeh ek perfect, safe, aur compact option hai sirf â‚¹28 Lakhs mein.` 
+                ? `<span class="success-text">Smart Compact Living:</span> Aapki choti family ke liye yeh ek perfect, safe, aur compact option hai sirf ₹28 Lakhs mein.` 
                 : `Yeh ek highly compact unit hai. Agar aap purely ek safe, low-ticket asset dhund rahe hain toh ye best hai. Sirf 1 unit bachi hai!`;
         }
         else if (project.name === "Divya Aureon") {
@@ -714,10 +830,10 @@ function generateDeepInsight(project, userInputs, math) {
     } 
     else {
         if (uFunding === "loan" && project.rera === "N/A") {
-            mismatchWarning += `<p class="insight-para"><span class="warning-text">âš ï¸ RERA Reality Check:</span> Aapne Bank Loan chuna hai, par yeh plot filhal RERA approved nahi hai. Yahan invest karne ke liye aapko cash-funding ki zarurat padegi ya RERA aane tak rukna hoga.</p>`;
+            mismatchWarning += `<p class="insight-para"><span class="warning-text">⚠️ RERA Reality Check:</span> Aapne Bank Loan chuna hai, par yeh plot filhal RERA approved nahi hai. Yahan invest karne ke liye aapko cash-funding ki zarurat padegi ya RERA aane tak rukna hoga.</p>`;
         } 
         if (uPurpose === "residential" && uSize <= 800) {
-            mismatchWarning += `<p class="insight-para"><span class="warning-text">ðŸ“ Size Alert:</span> Aapne apna ghar banane ka goal bataya hai, but ${uSize} sqft ek compact plot hai. Ek proper standalone villa ke liye future mein space constrain feel ho sakta hai.</p>`;
+            mismatchWarning += `<p class="insight-para"><span class="warning-text">📐 Size Alert:</span> Aapne apna ghar banane ka goal bataya hai, but ${uSize} sqft ek compact plot hai. Ek proper standalone villa ke liye future mein space constrain feel ho sakta hai.</p>`;
         }
 
         if (project.name === "Shanti Vihar") {
@@ -750,10 +866,10 @@ function generateDeepInsight(project, userInputs, math) {
             }
         }
         else if (project.name === "Highway Landmark") {
-            p1 = `11km par â‚¹2975/sqft ek 'Steal Deal' hai. Agar aap thoda deep-corridor commute kar sakte hain, toh lower budget mein aapko kaafi premium size ka plot mil jayega jisme future growth assured hai.`;
+            p1 = `11km par ₹2975/sqft ek 'Steal Deal' hai. Agar aap thoda deep-corridor commute kar sakte hain, toh lower budget mein aapko kaafi premium size ka plot mil jayega jisme future growth assured hai.`;
         }
         else if (project.name === "Highway Avenue") {
-            p1 = `13km door hone ke bawajood yeh perfectly ready-to-move premium infrastructure hai. Yeh ek early-adopter play haiâ€”aaj thodi doori bardasht karein aur kal ka elite highway-touch asset secure karein.`;
+            p1 = `13km door hone ke bawajood yeh perfectly ready-to-move premium infrastructure hai. Yeh ek early-adopter play hai—aaj thodi doori bardasht karein aur kal ka elite highway-touch asset secure karein.`;
         }
         else if (project.name === "Highway Radiance") {
             p1 = `16km deep-corridor hone se yeh purely ek long-term investment game hai. Jab Ujjain highway ka 6-lane expansion mature hoga, sabse zyada valuation spike isi specific belt mein capture hoga.`;
@@ -763,24 +879,24 @@ function generateDeepInsight(project, userInputs, math) {
     let totalLakhs = parseFloat(math.totalLakhs);
     if (uBudget === 1000) {
         if (totalLakhs >= 60) {
-            p3 = `<span class="success-text">Premium Portfolio Fit:</span> Aapke open budget ke mutabiq, yeh â‚¹${totalLakhs}L ka premium asset aapke portfolio mein ek strong long-term addition banega.`;
+            p3 = `<span class="success-text">Premium Portfolio Fit:</span> Aapke open budget ke mutabiq, yeh ₹${totalLakhs}L ka premium asset aapke portfolio mein ek strong long-term addition banega.`;
         } else if (totalLakhs >= 40) {
-            p3 = `<span class="success-text">Smart Capital Allocation:</span> Aapka budget constraint-free hai, aur yeh option sirf â‚¹${totalLakhs}L mein ek excellent value-for-money asset deliver kar raha hai.`;
+            p3 = `<span class="success-text">Smart Capital Allocation:</span> Aapka budget constraint-free hai, aur yeh option sirf ₹${totalLakhs}L mein ek excellent value-for-money asset deliver kar raha hai.`;
         } else {
-            p3 = `<span class="success-text">High Liquidity Advantage:</span> Open budget hone ke bawajood, yeh â‚¹${totalLakhs}L ka asset kaafi under-valued entry point de raha hai. Bacha hua massive capital aap construction ya multiple investments mein use kar sakte hain.`;
+            p3 = `<span class="success-text">High Liquidity Advantage:</span> Open budget hone ke bawajood, yeh ₹${totalLakhs}L ka asset kaafi under-valued entry point de raha hai. Bacha hua massive capital aap construction ya multiple investments mein use kar sakte hain.`;
         }
     } else if (totalLakhs <= uBudget) {
         let savings = (uBudget - totalLakhs).toFixed(2);
         if (savings > 5) {
-            p3 = `<span class="success-text">Financially Highly Optimized:</span> Yeh aapke â‚¹${uBudget}L budget bracket ke andar bahut easily fit hai. Aapke paas approx â‚¹${savings} Lakhs ka surplus bachega jise aap future development mein laga sakte hain.`;
+            p3 = `<span class="success-text">Financially Highly Optimized:</span> Yeh aapke ₹${uBudget}L budget bracket ke andar bahut easily fit hai. Aapke paas approx ₹${savings} Lakhs ka surplus bachega jise aap future development mein laga sakte hain.`;
         } else if (savings > 0) {
-            p3 = `<span class="success-text">Budget Fit:</span> Yeh perfectly aapke â‚¹${uBudget}L ki limit mein set ho raha hai, leaving a buffer of â‚¹${savings} Lakhs.`;
+            p3 = `<span class="success-text">Budget Fit:</span> Yeh perfectly aapke ₹${uBudget}L ki limit mein set ho raha hai, leaving a buffer of ₹${savings} Lakhs.`;
         } else {
-            p3 = `<span class="success-text">Exact Budget Match:</span> Yeh option aapki â‚¹${uBudget}L ki limit ko perfectly maximize kar raha hai without over-extending.`;
+            p3 = `<span class="success-text">Exact Budget Match:</span> Yeh option aapki ₹${uBudget}L ki limit ko perfectly maximize kar raha hai without over-extending.`;
         }
     } else {
         let diff = (totalLakhs - uBudget).toFixed(2);
-        p3 = `<span class="warning-text">Budget Extension Alert:</span> Current rates aur taxes milakar yeh aapke budget se lagbhag â‚¹${diff} Lakhs upar ja raha hai. Is specific option ke liye funding strategy thodi adjust karni hogi.`;
+        p3 = `<span class="warning-text">Budget Extension Alert:</span> Current rates aur taxes milakar yeh aapke budget se lagbhag ₹${diff} Lakhs upar ja raha hai. Is specific option ke liye funding strategy thodi adjust karni hogi.`;
     }
 
     let finalInsight = mismatchWarning;
@@ -797,11 +913,15 @@ function toggleAccordion(btn) {
         btn.innerHTML = "View Full Estimate & Analysis <span>+</span>";
     } else {
         content.style.display = "block";
-        btn.innerHTML = "Hide Details <span>âˆ’</span>";
+        btn.innerHTML = "Hide Details <span>−</span>";
     }
 }
 
 function findMatches() {
+    // 👈 Fade out the logo when results are populating
+    document.getElementById('brand-logo').style.opacity = '0';
+    document.getElementById('brand-logo').style.pointerEvents = 'none';
+
     const userName = document.getElementById('userName').value || "Client";
     const userPhone = document.getElementById('userPhone').value || "Not Provided";
     
@@ -871,13 +991,13 @@ function findMatches() {
 
             if (userPref === "garden") {
                 if (project.plcPercent) { prefCost = baseCost * (project.plcPercent.garden / 100); prefName = `Garden Facing (+${project.plcPercent.garden}%)`; } 
-                else { prefCost = project.plcFixed.garden * userSize; prefName = `Garden Facing (+â‚¹${project.plcFixed.garden}/sqft)`; }
+                else { prefCost = project.plcFixed.garden * userSize; prefName = `Garden Facing (+₹${project.plcFixed.garden}/sqft)`; }
             } else if (userPref === "corner") {
                 if (project.plcPercent) { prefCost = baseCost * (project.plcPercent.corner / 100); prefName = `Corner Plot (+${project.plcPercent.corner}%)`; } 
-                else { prefCost = project.plcFixed.corner * userSize; prefName = `Corner Plot (+â‚¹${project.plcFixed.corner}/sqft)`; }
+                else { prefCost = project.plcFixed.corner * userSize; prefName = `Corner Plot (+₹${project.plcFixed.corner}/sqft)`; }
             } else if (userPref === "both") {
                 if (project.plcPercent) { prefCost = baseCost * (project.plcPercent.both / 100); prefName = `Corner + Garden (+${project.plcPercent.both}%)`; } 
-                else { prefCost = project.plcFixed.both * userSize; prefName = `Corner + Garden (+â‚¹${project.plcFixed.both}/sqft)`; }
+                else { prefCost = project.plcFixed.both * userSize; prefName = `Corner + Garden (+₹${project.plcFixed.both}/sqft)`; }
             }
             
             let discountPct = project.discFull;
@@ -986,7 +1106,7 @@ function findMatches() {
     if (userBudgetLakhs !== 1000 && scoredProjects.length > 0 && scoredProjects[0].gapAmount > 5) {
         container.innerHTML += `
             <div class="global-warning result-animate" style="animation-delay: ${delayBase}s">
-                <h3>âš ï¸ Budget Extension Required</h3>
+                <h3>⚠️ Budget Extension Required</h3>
                 <p>There are currently no options strictly under ${userBudgetLakhs} Lakhs for your exact parameters. We have ranked the closest possible options below.</p>
             </div>
         `;
@@ -1001,9 +1121,9 @@ function findMatches() {
         let budgetAlertUI = "";
         if (userBudgetLakhs !== 1000) {
             if (match.gapAmount > 5) {
-                budgetAlertUI = `<div style="color: var(--error); font-size: 13px; font-weight: 600; margin-top: 8px;">Approx â‚¹${match.gapAmount.toFixed(2)}L above budget</div>`;
+                budgetAlertUI = `<div style="color: var(--error); font-size: 13px; font-weight: 600; margin-top: 8px;">Approx ₹${match.gapAmount.toFixed(2)}L above budget</div>`;
             } else if (match.gapAmount > 0) {
-                budgetAlertUI = `<div style="color: #b45309; font-size: 13px; font-weight: 600; margin-top: 8px;">Slightly above budget by â‚¹${match.gapAmount.toFixed(2)}L</div>`;
+                budgetAlertUI = `<div style="color: #b45309; font-size: 13px; font-weight: 600; margin-top: 8px;">Slightly above budget by ₹${match.gapAmount.toFixed(2)}L</div>`;
             }
         }
 
@@ -1012,17 +1132,17 @@ function findMatches() {
 
         if (match.math.isPlot) {
             subHeroText = `${userSize} SqFt Plot`;
-            let prefRow = userPref !== "none" ? `<div class="math-line"><span>${match.math.prefName}</span> <span>â‚¹${formatCurrency(match.math.pref)}</span></div>` : ``;
-            let discRow = match.math.discPct > 0 ? `<div class="math-line discount-text"><span>Discount (${match.math.discPct}%)</span> <span>- â‚¹${formatCurrency(match.math.disc)}</span></div>` : ``;
+            let prefRow = userPref !== "none" ? `<div class="math-line"><span>${match.math.prefName}</span> <span>₹${formatCurrency(match.math.pref)}</span></div>` : ``;
+            let discRow = match.math.discPct > 0 ? `<div class="math-line discount-text"><span>Discount (${match.math.discPct}%)</span> <span>- ₹${formatCurrency(match.math.disc)}</span></div>` : ``;
             
             hiddenMathBreakdown = `
                 <div style="margin-bottom: 20px;">
-                    <div class="math-line"><span>Plot Base Value</span> <span>â‚¹${formatCurrency(match.math.base)}</span></div>
+                    <div class="math-line"><span>Plot Base Value</span> <span>₹${formatCurrency(match.math.base)}</span></div>
                     ${prefRow}
                     ${discRow}
-                    <div class="math-line"><span>MPEB Charge (â‚¹${match.math.appliedMpebRate}/sqft)</span> <span>â‚¹${formatCurrency(match.math.mpeb)}</span></div>
-                    <div class="math-line"><span>Govt. Registry (10.5%)</span> <span>â‚¹${formatCurrency(match.math.reg)}</span></div>
-                    <div class="math-line math-total"><span>Total Estimate</span> <span>â‚¹${match.math.totalLakhs} Lakhs</span></div>
+                    <div class="math-line"><span>MPEB Charge (₹${match.math.appliedMpebRate}/sqft)</span> <span>₹${formatCurrency(match.math.mpeb)}</span></div>
+                    <div class="math-line"><span>Govt. Registry (10.5%)</span> <span>₹${formatCurrency(match.math.reg)}</span></div>
+                    <div class="math-line math-total"><span>Total Estimate</span> <span>₹${match.math.totalLakhs} Lakhs</span></div>
                 </div>
             `;
         } else {
@@ -1044,7 +1164,7 @@ function findMatches() {
                     <div class="${badgeClass}">${badgeText}</div>
                 </div>
                 
-                <h3 class="hero-price">â‚¹${match.math.totalLakhs} Lakhs</h3>
+                <h3 class="hero-price">₹${match.math.totalLakhs} Lakhs</h3>
                 <p class="hero-sub">${subHeroText} ${budgetAlertUI}</p>
 
                 <div class="specs-grid">
@@ -1086,19 +1206,39 @@ function findMatches() {
         delayBase += 0.25; 
     });
 
-    document.getElementById("quiz").style.display = "none";
     document.getElementById("results").style.display = "block";
-    window.scrollTo(0, 0);
 }
 
+// --- APP RESET FUNCTION ---
 function resetApp() {
-    currentStepID = 1;
-    document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-    renderStep();
-    document.getElementById("results").style.display = "none";
-    document.getElementById("quiz").style.display = "block";
-    window.scrollTo(0, 0);
+    window.location.reload();
 }
+
+// --- 🪄 LANDING PAGE TRANSITION ANIMATION ---
+function startAssessment() {
+    const landingPage = document.getElementById('landing-page');
+    const logo = document.getElementById('brand-logo');
+    const quizSection = document.getElementById('quiz');
+
+    // 1. Instantly trigger the fluid logo movement
+    logo.classList.add('quiz-mode');
+    document.body.classList.add('quiz-active');
+
+    // 2. Beautifully fade out the entire landing page
+    landingPage.style.opacity = '0';
+    
+    // 3. Reveal the quiz underneath while the landing page melts away
+    quizSection.style.display = 'block';
+    setTimeout(() => {
+        quizSection.style.opacity = '1';
+    }, 50);
+
+    // 4. Once the 0.8-second fade is completely done, destroy the invisible layout so you can click freely
+    setTimeout(() => {
+        landingPage.style.display = 'none';
+    }, 800);
+}
+    
 </script>
 </body>
 </html>
