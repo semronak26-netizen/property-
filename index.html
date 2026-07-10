@@ -23,20 +23,22 @@
             z-index: 1;
             transition: opacity 0.8s ease;
         }
-
-        /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
+        
+             /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
         #brand-logo {
             position: fixed;
             top: 15vh;
             left: 50%;
             transform: translateX(-50%);
-            height: 75px;
+            height: 100px; /* 👈 Increased for massive brand authority */
             width: auto;
             object-fit: contain;
-            z-index: 1001; /* Stays above the landing page forever */
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001; 
+            /* Added opacity to the transition so it fades gracefully */
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
             filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
         }
+        
 
         /* The Magic Logo Transition State */
         #brand-logo.quiz-mode {
@@ -940,6 +942,21 @@ function toggleAccordion(btn) {
 }
 
 function findMatches() {
+
+        // (Inside your findMatches function...)
+    
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("loading").style.display = "flex";
+    
+    // 👈 NEW: Fade out the logo when loading starts
+    document.getElementById('brand-logo').style.opacity = '0';
+    document.getElementById('brand-logo').style.pointerEvents = 'none';
+
+    setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+        const container = document.getElementById("results-container");
+        
+    
     const userName = document.getElementById('userName').value || "Client";
     const userPhone = document.getElementById('userPhone').value || "Not Provided";
     
