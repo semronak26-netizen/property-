@@ -732,6 +732,11 @@ renderStep();
 function initiateProcessing() {
     document.getElementById("quiz").style.display = "none";
     document.getElementById("loading-screen").style.display = "block";
+    
+    // 👈 NEW: Hide the logo as soon as the loading screen appears
+    document.getElementById("brand-logo").style.opacity = "0";
+    document.getElementById("brand-logo").style.pointerEvents = "none";
+    
     window.scrollTo(0, 0);
     
     const loadingText = document.getElementById("loading-text");
