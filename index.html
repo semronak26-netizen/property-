@@ -1241,10 +1241,26 @@ function findMatches() {
         delayBase += 0.25; 
     });
 
-    document.getElementById("quiz").style.display = "none";
-    document.getElementById("results").style.display = "block";
-    window.scrollTo(0, 0);
+            document.getElementById("quiz").style.display = "none";
+        document.getElementById("results").style.display = "block";
+        window.scrollTo(0, 0);
+    }, 2000); /* 👈 FIX 1: This is the missing bracket that caused the crash! */
 }
+
+/* 👈 FIX 2: Restoring the accidentally deleted resetApp function */
+function resetApp() {
+    currentStepID = 1;
+    document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+    renderStep();
+    document.getElementById("results").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    window.scrollTo(0, 0);
+    
+    // Bring the logo back for a new session
+    document.getElementById('brand-logo').style.opacity = '1';
+    document.getElementById('brand-logo').style.pointerEvents = 'auto';
+}
+
 // --- 🪄 LANDING PAGE TRANSITION ANIMATION ---
 function startAssessment() {
     const landingPage = document.getElementById('landing-page');
@@ -1270,7 +1286,6 @@ function startAssessment() {
     }, 800);
 }
     
- 
 </script>
 </body>
 </html>
