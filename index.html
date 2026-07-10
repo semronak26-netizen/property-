@@ -2,9 +2,144 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Find Your Ideal Property</title>
+        <title>Shivalay Infratech | Premium Real Estate Matchmaker</title>
+    <meta name="description" content="Hum bharose ko pyaar se bunte hain, tabhi log humein chunte hain. Take our personalized assessment to find your ideal property along the Indore-Ujjain corridor.">
+
     <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+                /* 💎 SHIVALAY LANDING PAGE STYLES */
+        #landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('images/lander.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.8s ease;
+        }
+
+        .landing-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 1;
+            transition: opacity 0.8s ease;
+        }
+
+        .landing-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            padding: 12vh 24px 4vh 24px;
+        }
+
+        #brand-logo {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
+        }
+
+        /* The Magic Logo Transition */
+        #brand-logo.quiz-mode {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 50px;
+            z-index: 999;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05));
+        }
+
+        .landing-text {
+            margin-top: 4vh;
+            transition: opacity 0.4s ease;
+        }
+
+        .eyebrow {
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .main-tagline {
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            font-size: 32px;
+            line-height: 1.3;
+            font-style: italic;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
+
+        .sub-text {
+            color: rgba(255,255,255,0.85);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .landing-action {
+            margin-top: auto; /* Anchors button to the bottom */
+            width: 100%;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-start {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 18px 32px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 8px 32px rgba(255,255,255,0.2); }
+            100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        }
+
+        .legal-microcopy {
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            margin-top: 16px;
+            line-height: 1.4;
+        }
+
+        body.quiz-active { padding-top: 90px; } /* Pushes quiz down to make room for fixed logo */
+        
+        
         :root {
             /* Apple Design System Colors */
             --primary: #1d1d1f; 
@@ -294,15 +429,26 @@
 
 <div class="container">
     <div id="quiz">
-                <div class="header">
-            <img src="images/shivalay-logo.png" 
-     alt="Company Logo" 
-     style="height: 65px; width: auto; margin-bottom: 16px; object-fit: contain;">
+                    <div id="landing-page">
+        <div class="landing-overlay"></div>
+        <div class="landing-content">
+            <img id="brand-logo" src="images/shivalay-logo.png" alt="Shivalay Infratech">
+            
+            <div class="landing-text" id="landing-text">
+                <div class="eyebrow">SHIVALAY INFRATECH PRESENTS</div>
+                <h1 class="main-tagline">"Hum bharose ko pyaar se bunte hain, tabhi log humein chunte hain."</h1>
+                <p class="sub-text">Indore-Ujjain highway par aapke sapno ki property aur smart investment dhoondhne ka ek personalized tareeqa.</p>
+            </div>
 
-                 
-            <h1>Find Your Ideal Property</h1>
-            <p>Personalized recommendations based on your budget and goals</p>
+            <div class="landing-action" id="landing-action">
+                <button class="btn-start" onclick="startAssessment()">Start Assessment</button>
+                <p class="legal-microcopy">Aapki privacy humari priority hai. 'Start Assessment' par click karke, aap apni property preferences Shivalay Infratech ki team ke sath secure roop se share karne ki anumati dete hain.</p>
+            </div>
         </div>
+    </div>
+
+    <div class="container" id="quiz" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
+    
 
 
         <div class="progress-container">
@@ -1072,6 +1218,37 @@ function resetApp() {
     document.getElementById("quiz").style.display = "block";
     window.scrollTo(0, 0);
 }
+    // --- 🪄 LANDING PAGE TRANSITION ANIMATION ---
+function startAssessment() {
+    const landingPage = document.getElementById('landing-page');
+    const landingText = document.getElementById('landing-text');
+    const landingAction = document.getElementById('landing-action');
+    const overlay = document.querySelector('.landing-overlay');
+    const logo = document.getElementById('brand-logo');
+    const quizSection = document.getElementById('quiz');
+
+    // 1. Dissolve the text, button, and glass overlay smoothly
+    landingText.style.opacity = '0';
+    landingAction.style.opacity = '0';
+    overlay.style.opacity = '0';
+    
+    // 2. Strip the background image seamlessly
+    setTimeout(() => {
+        landingPage.style.backgroundImage = 'none';
+        landingPage.style.backgroundColor = 'transparent';
+    }, 400);
+
+    // 3. Trigger the magic logo movement to the top & push the body down
+    logo.classList.add('quiz-mode');
+    document.body.classList.add('quiz-active');
+
+    // 4. Elegantly fade in the actual quiz underneath
+    quizSection.style.display = 'block';
+    setTimeout(() => {
+        quizSection.style.opacity = '1';
+        landingPage.style.pointerEvents = 'none'; // Lets clicks pass through to the quiz
+    }, 400);
+    }
 </script>
 </body>
 </html>
