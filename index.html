@@ -10,37 +10,20 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
                 /* 💎 SHIVALAY LANDING PAGE STYLES */
-     
-        .landing-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            z-index: 1;
-            transition: opacity 0.8s ease;
-        }
-        
-             /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
+
         #brand-logo {
             position: fixed;
             top: 15vh;
             left: 50%;
             transform: translateX(-50%);
-            height: 100px; /* 👈 Increased for massive brand authority */
+            height: 100px; 
             width: auto;
             object-fit: contain;
             z-index: 1001; 
-            /* Added opacity to the transition so it fades gracefully */
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
             filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
         }
-        
 
-        /* The Magic Logo Transition State */
         #brand-logo.quiz-mode {
             top: 16px;
             height: 45px;
@@ -64,6 +47,22 @@
             transition: opacity 0.8s ease;
         }
 
+        
+        
+        .landing-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 1;
+            transition: opacity 0.8s ease;
+        }
+        
+                     /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
         .landing-content {
             position: relative;
             z-index: 2;
@@ -1241,13 +1240,13 @@ function findMatches() {
         delayBase += 0.25; 
     });
 
-            document.getElementById("quiz").style.display = "none";
+                    document.getElementById("quiz").style.display = "none";
         document.getElementById("results").style.display = "block";
         window.scrollTo(0, 0);
-    }, 2000); /* 👈 FIX 1: This is the missing bracket that caused the crash! */
+    }, 2000); // 👈 THIS is the exact timer lock that was missing!
 }
 
-/* 👈 FIX 2: Restoring the accidentally deleted resetApp function */
+// --- 🪄 RESET APP FUNCTION (Restored) ---
 function resetApp() {
     currentStepID = 1;
     document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
@@ -1285,7 +1284,6 @@ function startAssessment() {
         landingPage.style.display = 'none';
     }, 800);
 }
-    
 </script>
 </body>
 </html>
