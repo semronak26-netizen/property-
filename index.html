@@ -10,7 +10,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
         
         :root {
-            /* Apple Design System Colors */
             --primary: #1d1d1f; 
             --accent: #0071e3; 
             --accent-light: #e8f0fe;
@@ -19,15 +18,21 @@
             --text-main: #1d1d1f;
             --text-muted: #86868b;
             --border: #d2d2d7;
+            --success: #00875a;
+            --error: #e3000f;
         }
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            /* Native Apple Typography */
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px 15px;
-            display: flex; flex-direction: column; align-items: center;
+            background-color: var(--bg); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 20px 15px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
         }
 
         /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
@@ -44,7 +49,6 @@
             filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
         }
 
-        /* The Magic Logo Transition State */
         #brand-logo.quiz-mode {
             top: 16px;
             height: 45px;
@@ -90,11 +94,12 @@
             width: 100%;
             max-width: 500px;
             height: 100%;
-            padding: calc(15vh + 100px) 24px 4vh 24px; 
+            padding: calc(15vh + 120px) 24px 4vh 24px; 
         }
 
         .landing-text {
-            margin-top: 4vh;
+            margin-top: 2vh;
+            transition: opacity 0.4s ease;
         }
 
         .eyebrow {
@@ -126,6 +131,7 @@
         .landing-action {
             margin-top: auto; 
             width: 100%;
+            transition: opacity 0.4s ease;
         }
 
         .btn-start {
@@ -160,35 +166,184 @@
 
         body.quiz-active { padding-top: 80px; }
 
-        /* General Quiz App Styles */
+        /* General Quiz Styles */
         .container { max-width: 600px; width: 100%; }
         
-        .step { display: none; width: 100%; animation: slideUp 0.5s ease; }
+        .progress-bar {
+            width: 100%; height: 2px; background-color: var(--border);
+            border-radius: 1px; margin-bottom: 30px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; background-color: var(--accent); width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step { display: none; animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .step.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        .progress-bar-container { width: 100%; height: 2px; background: var(--border); margin-bottom: 30px; border-radius: 2px; overflow: hidden; }
-        .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question {
+            font-size: 24px; font-weight: 600; margin-bottom: 24px;
+            letter-spacing: -0.5px; line-height: 1.2;
+        }
+
+        .options { display: grid; gap: 12px; }
         
-        .question-card { background: var(--card); padding: 30px; border-radius: 24px; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.03); margin-bottom: 20px; text-align: center; }
-        .question-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); letter-spacing: -0.5px; }
-        .question-sub { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
+        label.option {
+            background-color: var(--card); border: 1px solid var(--border);
+            padding: 18px 20px; border-radius: 14px; font-size: 16px;
+            font-weight: 500; cursor: pointer; display: flex; align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px -5px rgba(0,0,0,0.03);
+        }
+        
+        label.option:active { transform: scale(0.98); }
+        
+        input[type="radio"] { display: none; }
+        
+        input[type="radio"]:checked + label.option, label.option.selected {
+            border-color: var(--accent); background-color: var(--accent-light);
+            color: var(--accent); box-shadow: 0 4px 15px -5px rgba(0, 113, 227, 0.2);
+        }
+        
+        .nav-buttons {
+            display: flex; justify-content: space-between; margin-top: 30px;
+        }
+        
+        button {
+            padding: 16px 24px; border: none; border-radius: 12px;
+            font-size: 16px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-prev { background-color: transparent; color: var(--accent); padding-left: 0; }
+        .btn-next { background-color: var(--accent); color: white; width: 100%; box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3); }
+        .btn-next:active { transform: scale(0.98); }
         
         input[type="text"], input[type="tel"] {
-            width: 100%; padding: 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; margin-bottom: 15px; background: #f9f9fb;
+            width: 100%; padding: 18px; border: 1px solid var(--border);
+            border-radius: 14px; font-size: 16px; background-color: var(--card);
+            outline: none; -webkit-appearance: none; box-shadow: 0 4px 12px -5px rgba(0,0,0,0.03);
         }
-        input:focus { outline: none; border-color: var(--accent); background: #fff; }
+        input[type="text"]:focus, input[type="tel"]:focus {
+            border-color: var(--accent);
+        }
 
-        .btn-next { background: var(--accent); color: white; border: none; padding: 18px; width: 100%; border-radius: 16px; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: all 0.2s ease; }
-        .btn-next:active { transform: scale(0.96); }
-
-        /* LOADING & RESULTS UI */
-        #loading { display: none; flex-direction: column; align-items: center; justify-content: center; height: 50vh; text-align: center; }
-        .ai-glow { width: 80px; height: 80px; background: radial-gradient(circle, #0071e3, #42a5f5, transparent); border-radius: 50%; filter: blur(15px); animation: breathe 2s infinite ease-in-out; margin-bottom: 20px; }
-        @keyframes breathe { 0% { transform: scale(0.8); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.8); opacity: 0.6; } }
-
+        /* Results & Centurion Card */
         #results { display: none; width: 100%; }
-        .btn-restart { background: #f5f5f7; color: #1d1d1f; border: 1px solid #d2d2d7; padding: 16px; border-radius: 12px; width: 100%; font-weight: 600; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #2c2c2e 0%, #1a1a1c 100%);
+            border-radius: 20px; padding: 24px; color: white;
+            margin-bottom: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 200px;
+        }
+        
+        .emv-chip {
+            width: 45px; height: 35px; border-radius: 6px;
+            background: linear-gradient(135deg, #e5e5ea 0%, #d2d2d7 50%, #f5f5f7 100%);
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.5), inset 0 -1px 3px rgba(0,0,0,0.2);
+            margin-bottom: 12px; position: relative;
+        }
+        
+        .emv-chip::after {
+            content: ''; position: absolute; top: 10%; left: 10%; width: 80%; height: 80%;
+            border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
+        }
+        
+        .card-top-left { display: flex; flex-direction: column; }
+        
+        .client-name-emboss {
+            font-family: "SF Pro Display", -apple-system, sans-serif;
+            font-size: 18px; font-weight: 600; color: #e5e5ea;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-shadow: -1px -1px 1px rgba(255,255,255,0.2), 1px 1px 1px rgba(0,0,0,0.6);
+            margin-top: 4px;
+        }
+        
+        .card-footer {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 16px;
+        }
+        
+        .summary-item { font-size: 12px; color: #a1a1a6; display: flex; flex-direction: column; }
+        .summary-item strong { font-size: 14px; color: white; font-weight: 500; margin-top: 2px; }
+        
+        .project-card {
+            background-color: var(--card); border-radius: 18px; padding: 20px;
+            margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.03); opacity: 0;
+            transform: translateY(30px); animation: staggerFade 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes staggerFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .card-header h2 { margin: 0; font-size: 20px; letter-spacing: -0.3px; }
+        
+        .match-badge {
+            background-color: var(--success); color: white; padding: 4px 10px;
+            border-radius: 8px; font-size: 12px; font-weight: 600;
+        }
+        .match-badge.good { background-color: #f56300; }
+        
+        .hero-price { font-size: 28px; color: var(--accent); margin: 0 0 16px 0; font-weight: 700; letter-spacing: -0.5px; }
+        
+        .specs-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
+            background-color: var(--bg); padding: 16px; border-radius: 12px;
+        }
+        
+        .spec-item { display: flex; flex-direction: column; }
+        .spec-label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+        .spec-value { font-size: 14px; font-weight: 600; }
+        
+        .wa-action {
+            display: block; width: 100%; text-align: center; background-color: #25D366;
+            color: white; padding: 14px; border-radius: 12px; text-decoration: none;
+            font-weight: 600; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            transition: all 0.2s;
+        }
+        .wa-action:active { transform: scale(0.98); }
+        
+        .accordion-btn {
+            background-color: var(--accent-light); color: var(--accent);
+            width: 100%; text-align: left; padding: 14px 16px; font-size: 14px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .accordion-content {
+            display: none; padding: 16px 0 0 0; border-top: 1px solid var(--border);
+            margin-top: 16px; font-size: 14px; line-height: 1.5; color: var(--text-muted);
+        }
+        
+        /* Apple AI Glow Loading */
+        #loading {
+            display: none; flex-direction: column; align-items: center;
+            justify-content: center; height: 50vh; text-align: center;
+        }
+        
+        .apple-glow {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, #0071e3, #42a1ff, #a0cfff);
+            filter: blur(15px); animation: pulseGlow 2s ease-in-out infinite alternate;
+            margin-bottom: 24px;
+        }
+        
+        @keyframes pulseGlow {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        .loading-text { font-size: 18px; font-weight: 500; color: var(--text-main); letter-spacing: -0.3px; }
     </style>
 </head>
 <body>
@@ -213,143 +368,573 @@
     </div>
 
     <div class="container" id="quiz" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progress"></div>
-        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
 
         <div class="step active" id="step-1">
-            <div class="question-card">
-                <div class="question-title">Chaliye, aapke naam se shuru karte hain</div>
-                <div class="question-sub">Aapka shubh naam?</div>
-                <input type="text" id="userName" placeholder="e.g. Rahul Sharma">
+            <div class="question">Chaliye, aapke naam se shuru karte hain.</div>
+            <input type="text" id="q_name" placeholder="Enter your full name" autocomplete="name">
+            <div class="nav-buttons">
+                <button class="btn-prev" style="visibility: hidden;">Back</button>
                 <button class="btn-next" onclick="nextStep(1)">Continue</button>
             </div>
         </div>
 
         <div class="step" id="step-2">
-            <div class="question-card">
-                <div class="question-title">Aapka contact number?</div>
-                <input type="tel" id="userPhone" placeholder="10-digit mobile number">
-                <button class="btn-next" onclick="findMatches()">Find Matches</button> </div>
+            <div class="question">Aapka mobile number kya hai?</div>
+            <input type="tel" id="q_phone" placeholder="Enter your 10-digit number" pattern="[0-9]*" maxlength="10">
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevStep(2)">Back</button>
+                <button class="btn-next" onclick="nextStep(2)">Continue</button>
+            </div>
         </div>
 
+        <div class="step" id="step-3">
+            <div class="question">Aap property kitni jaldi finalize karna chahte hain?</div>
+            <div class="options">
+                <input type="radio" name="urgency" id="urg_1" value="immediate"><label class="option" for="urg_1">Bohot jaldi (Within 1 week)</label>
+                <input type="radio" name="urgency" id="urg_2" value="soon"><label class="option" for="urg_2">Thoda time hai (1 - 3 months)</label>
+                <input type="radio" name="urgency" id="urg_3" value="exploring"><label class="option" for="urg_3">Abhi sirf options dekh rahe hain</label>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevStep(3)">Back</button>
+                <button class="btn-next" onclick="nextStep(3)">Continue</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-4">
+            <div class="question">Aapka primary goal kya hai?</div>
+            <div class="options">
+                <input type="radio" name="purpose" id="p_inv" value="investment"><label class="option" for="p_inv">Investment (High Return)</label>
+                <input type="radio" name="purpose" id="p_res" value="residential"><label class="option" for="p_res">Residential (Khud ke rehne ke liye)</label>
+                <input type="radio" name="purpose" id="p_both" value="both"><label class="option" for="p_both">Both (Hold & Build Later)</label>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevStep(4)">Back</button>
+                <button class="btn-next" onclick="nextStep(4)">Continue</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-5">
+            <div class="question">Aap kya dhoondh rahe hain?</div>
+            <div class="options">
+                <input type="radio" name="prop_type" id="t_plot" value="plot" onchange="handleTypeSelection('plot')"><label class="option" for="t_plot">Plot (Zameen)</label>
+                <input type="radio" name="prop_type" id="t_flat" value="flat" onchange="handleTypeSelection('flat')"><label class="option" for="t_flat">Flat (Ready/Under-construction)</label>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevStep(5)">Back</button>
+                <button class="btn-next" onclick="nextStep(5)">Continue</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-6a">
+            <div class="question">Plot ke liye specific requirement?</div>
+            <div class="options">
+                <input type="radio" name="plot_pos" id="pos_std" value="none"><label class="option" for="pos_std">Standard Plot chalega</label>
+                <input type="radio" name="plot_pos" id="pos_cor" value="corner"><label class="option" for="pos_cor">Corner Plot chahiye</label>
+                <input type="radio" name="plot_pos" id="pos_gar" value="garden"><label class="option" for="pos_gar">Garden Facing chahiye</label>
+                <input type="radio" name="plot_pos" id="pos_both" value="both"><label class="option" for="pos_both">Corner + Garden dono</label>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevStep(6, 'plot')">Back</button>
+                <button class="btn-next" onclick="nextStep(6, 'plot')">Continue</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-6b">
+            <div class="question">Flat ke liye family size kya hai?</div>
+            <div class="options">
+                <input type="radio" name="family_size" id="fam_2" value="2bhk"><label class="option" for="fam_2">Small Family (Need 2 BHK)</label>
+                <input type="radio" name="family_size" id="fam_3" value="3bhk"><label class="option" for="fam_3">Medium Family (Need 3 BHK)</label>
+                <input type="radio" name="family_size" id="fam_4" value="4bhk"><label class="option" for="fam_4">Large Family (Need 4+ BHK)</label>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevStep(6, 'flat')">Back</button>
+                <button class="btn-next" onclick="nextStep(6, 'flat')">Continue</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-7">
+            <div class="question">Aapka budget estimate kya hai?</div>
+            <div class="options">
+                <input type="radio" name="budget" id="b_25" value="25"><label class="option" for="b_25">₹25 - 40 Lakhs</label>
+                <input type="radio" name="budget" id="b_40" value="40"><label class="option" for="b_40">₹40 - 60 Lakhs</label>
+                <input type="radio" name="budget" id="b_60" value="60"><label class="option" for="b_60">₹60 Lakhs - 1 Cr+</label>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevStep(7)">Back</button>
+                <button class="btn-next" onclick="nextStep(7)">Continue</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-8">
+            <div class="question">Payment ka plan kaisa rahega?</div>
+            <div class="options">
+                <input type="radio" name="funding" id="f_cash" value="cash"><label class="option" for="f_cash">Full Cash / Own Funds</label>
+                <input type="radio" name="funding" id="f_loan" value="loan"><label class="option" for="f_loan">Bank Loan Required</label>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevStep(8)">Back</button>
+                <button class="btn-next" onclick="submitData()">Find My Match</button>
+            </div>
+        </div>
     </div>
 
     <div id="loading">
-        <div class="ai-glow"></div>
-        <h2 style="font-weight: 600; margin-bottom: 5px;">Analyzing Preferences...</h2>
-        <p style="color: var(--text-muted); font-size: 14px;">Curating your custom real estate portfolio</p>
+        <div class="apple-glow"></div>
+        <div class="loading-text" id="loading-text">Analyzing your portfolio...</div>
     </div>
 
-    <div id="results" class="container">
+    <div class="container" id="results">
+        <div class="summary-card">
+            <div class="card-top-left">
+                <div class="emv-chip"></div>
+                <div class="client-name-emboss" id="res_name">CLIENT NAME</div>
+            </div>
+            <div class="card-footer">
+                <div class="summary-item">Target Strategy<strong id="res_purpose">Investment</strong></div>
+                <div class="summary-item">Asset Class<strong id="res_type">Plot</strong></div>
+                <div class="summary-item">Budget Cap<strong id="res_budget">₹60L+</strong></div>
+                <div class="summary-item" style="text-align:right;">Contact<strong id="res_phone">9876543210</strong></div>
+            </div>
+        </div>
+
+        <h3 style="margin: 30px 0 20px 0; font-size: 22px; font-weight: 600; letter-spacing: -0.5px;">Curated Portfolio Matches</h3>
         <div id="results-container"></div>
-        <button class="btn-restart" onclick="resetApp()">Start Over</button>
+        <button class="btn-next" style="background-color: var(--primary); margin-top: 20px;" onclick="resetApp()">Start New Assessment</button>
     </div>
 
 <script>
-    // -----------------------------------------------------
-    // 1. DATA & LOGIC ENGINE
-    // -----------------------------------------------------
+// --- 🚨 REPLACE THIS WITH YOUR DEPLOYED APPS SCRIPT URL ---
+const SHEET_WEB_APP_URL = "YOUR_GOOGLE_SHEETS_MACRO_URL_HERE";
+
+// --- 🚨 REPLACE THIS WITH YOUR 9 PROJECTS ARRAY ---
+// Make sure to add the  imgUrl: "images/project-name.jpg"  to your properties so they display nicely!
+const projects = [
+    { 
+        name: "Shanti Vihar", type: "plot", rate: 4500, rera: "P-IND-22-3767", status: "Ready", 
+        bestFor: "Residential", usps: "Fully developed, immediate registry", 
+        mpeb: 35000, plc: 10, cashDiscount: 5, p2: "Perfect for immediate house construction.", imgUrl: ""
+    },
+    { 
+        name: "Highway Trident", type: "plot", rate: 3200, rera: "Greenfield", status: "Upcoming", 
+        bestFor: "Investment", usps: "On main highway, high appreciation", 
+        mpeb: 0, plc: 0, cashDiscount: 8, p2: "Strictly for hold-and-build investors.", imgUrl: ""
+    },
+    { 
+        name: "Mangla Classic", type: "flat", rate: 0, flatCost: 35, rera: "P-UJJ-23-1122", status: "Under Construction", 
+        bestFor: "Residential", usps: "Premium amenities, near SAIMS", 
+        mpeb: 0, plc: 0, cashDiscount: 2, p2: "Ideal 2BHK/3BHK flats for families.", imgUrl: ""
+    }
+    // Paste your other projects here!
+];
+
+let currentStepID = 1;
+const totalSteps = 8;
+const userPreferences = {};
+
+const loadingPhases = [
+    "Cross-referencing RERA database...",
+    "Calculating exact MPEB & PLC logic...",
+    "Finalizing portfolio matches..."
+];
+
+function updateOptionsUI(stepId) {
+    const inputs = document.querySelectorAll(`#step-${stepId} input[type="radio"]`);
+    inputs.forEach(input => {
+        if(input.checked) {
+            input.nextElementSibling.classList.add('selected');
+        } else {
+            input.nextElementSibling.classList.remove('selected');
+        }
+    });
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(input => {
+    input.addEventListener('change', (e) => {
+        const stepDiv = e.target.closest('.step');
+        const stepId = stepDiv.id.split('-')[1];
+        updateOptionsUI(stepId);
+        
+        // Auto-advance
+        setTimeout(() => {
+            if(stepId === '5') {
+                nextStep(5);
+            } else if(stepId === '6a' || stepId === '6b') {
+                nextStep(6, userPreferences.prop_type);
+            } else if(stepId !== '8') {
+                nextStep(parseInt(stepId));
+            }
+        }, 350);
+    });
+});
+
+function renderStep() {
+    document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
     
-    // ⚠️ [PASTE YOUR GOOGLE SHEETS APP SCRIPT URL HERE] 
-    const sheetURL = "https://script.google.com/macros/s/YOUR_MACRO_URL_HERE/exec";
-
-    // ⚠️ [PASTE YOUR FULL 'projects' ARRAY HERE (All 9 properties!)]
-    const projects = []; 
-
-    // App State Variables
-    let currentStepID = 1;
-    const totalSteps = 2; // Update this to your actual number of questions
-
-    // -----------------------------------------------------
-    // 2. MAGIC LANDING PAGE ANIMATION (BULLETPROOF FIXED!)
-    // -----------------------------------------------------
-    function startAssessment() {
-        const landingPage = document.getElementById('landing-page');
-        const logo = document.getElementById('brand-logo');
-        const quizSection = document.getElementById('quiz');
-
-        // 1. Instantly trigger the fluid logo movement
-        logo.classList.add('quiz-mode');
-        document.body.classList.add('quiz-active');
-
-        // 2. Beautifully fade out the entire landing page
-        landingPage.style.opacity = '0';
-        
-        // 3. Reveal the quiz underneath while the landing page melts away
-        quizSection.style.display = 'block';
-        setTimeout(() => {
-            quizSection.style.opacity = '1';
-        }, 50);
-
-        // 4. Once the 0.8-second fade is completely done, destroy the invisible layout so you can click freely
-        setTimeout(() => {
-            landingPage.style.display = 'none';
-        }, 800);
-    }
-
-    // -----------------------------------------------------
-    // 3. QUIZ NAVIGATION
-    // -----------------------------------------------------
-    function nextStep(step) {
-        document.getElementById(`step-${step}`).classList.remove('active');
-        currentStepID = step + 1;
+    if (currentStepID === 6) {
+        if (userPreferences.prop_type === 'plot') {
+            document.getElementById('step-6a').classList.add('active');
+        } else {
+            document.getElementById('step-6b').classList.add('active');
+        }
+    } else {
         document.getElementById(`step-${currentStepID}`).classList.add('active');
-        
-        const progress = ((currentStepID - 1) / totalSteps) * 100;
-        document.getElementById('progress').style.width = `${progress}%`;
+    }
+    
+    document.getElementById('progress').style.width = `${((currentStepID - 1) / totalSteps) * 100}%`;
+}
+
+function handleTypeSelection(type) {
+    userPreferences.prop_type = type;
+}
+
+function nextStep(step) {
+    if(step === 1) {
+        const name = document.getElementById('q_name').value.trim();
+        if(!name) return alert("Please enter your name");
+        userPreferences.name = name;
+    }
+    if(step === 2) {
+        const phone = document.getElementById('q_phone').value.trim();
+        if(phone.length !== 10) return alert("Please enter a valid 10-digit number");
+        userPreferences.phone = phone;
+    }
+    if(step === 3) {
+        const urg = document.querySelector('input[name="urgency"]:checked');
+        if(!urg) return alert("Please select an option");
+        userPreferences.urgency = urg.value;
+    }
+    if(step === 4) {
+        const purp = document.querySelector('input[name="purpose"]:checked');
+        if(!purp) return alert("Please select an option");
+        userPreferences.purpose = purp.value;
+    }
+    if(step === 5) {
+        const pt = document.querySelector('input[name="prop_type"]:checked');
+        if(!pt) return alert("Please select Plot or Flat");
+        userPreferences.prop_type = pt.value;
+    }
+    if(step === 6) {
+        if(userPreferences.prop_type === 'plot') {
+            const pos = document.querySelector('input[name="plot_pos"]:checked');
+            if(!pos) return alert("Please select a position preference");
+            userPreferences.plot_pos = pos.value;
+        } else {
+            const fam = document.querySelector('input[name="family_size"]:checked');
+            if(!fam) return alert("Please select a family size");
+            userPreferences.family_size = fam.value;
+        }
+    }
+    if(step === 7) {
+        const bud = document.querySelector('input[name="budget"]:checked');
+        if(!bud) return alert("Please select a budget estimate");
+        userPreferences.budget = bud.value;
+    }
+    
+    currentStepID++;
+    renderStep();
+}
+
+function prevStep(step, type=null) {
+    currentStepID--;
+    renderStep();
+}
+
+function calculateScore(project) {
+    let score = 100;
+    let mathBreakdown = {};
+    let dynamicInsight = project.p2;
+
+    if (userPreferences.prop_type !== project.type) return { score: -999 };
+
+    if (userPreferences.purpose === "residential" && project.bestFor === "Investment") {
+        score -= 50;
+        dynamicInsight = `<div style="color:var(--error); margin-bottom:8px; font-weight:600;">🛑 NOT IDEAL FOR RESIDENTIAL</div>` + dynamicInsight;
+    } else if (userPreferences.purpose === "investment" && project.bestFor === "Residential") {
+        score -= 20;
     }
 
-    // -----------------------------------------------------
-    // 4. MATCHMAKING & LOADING (WITH PROPER TIMER CLOSURE)
-    // -----------------------------------------------------
-    function findMatches() {
-        // Hide the quiz and show the loader
-        document.getElementById("quiz").style.display = "none";
-        document.getElementById("loading").style.display = "flex";
+    if (userPreferences.funding === "loan" && project.rera === "Greenfield") {
+        score -= 100;
+        dynamicInsight = `<div style="color:var(--error); margin-bottom:8px; font-weight:600;">🛑 BANK LOAN NOT AVAILABLE (GREENFIELD)</div>` + dynamicInsight;
+    }
+
+    if (project.type === "plot") {
+        let size = 1000;
+        if (userPreferences.budget == 40) size = 1200;
+        if (userPreferences.budget == 60) size = 1500;
+
+        let finalRate = project.rate;
+        if (userPreferences.funding === "cash") {
+            finalRate = finalRate - (finalRate * (project.cashDiscount / 100));
+        }
         
-        // 👈 Fade out the logo when loading starts so results are clean
-        document.getElementById('brand-logo').style.opacity = '0';
-        document.getElementById('brand-logo').style.pointerEvents = 'none';
+        let plcAmount = 0;
+        if (userPreferences.plot_pos && userPreferences.plot_pos !== "none") {
+            plcAmount = finalRate * (project.plc / 100);
+            finalRate += plcAmount;
+        }
 
-        // ⚠️ NOTE FOR RONAK: Make sure to paste your actual Google Sheets 'fetch' POST code and your custom 6-variable logic here if it was separated!
+        let totalValue = (size * finalRate) + project.mpeb;
+        let totalLakhs = (totalValue / 100000).toFixed(2);
 
-        // Wait for AI glow loading effect (EXACTLY 2 SECONDS)
-        setTimeout(() => {
-            // Once the timer hits 2 seconds, kill the loading screen and show results
-            document.getElementById("loading").style.display = "none";
-            
-            // Render Results (Paste your custom HTML generation logic for the cards here)
-            const container = document.getElementById("results-container");
-            // container.innerHTML = ... 
+        let userBudgetMax = parseInt(userPreferences.budget);
+        if (userBudgetMax == 60) userBudgetMax = 100;
+        
+        if (totalLakhs > userBudgetMax) {
+            let difference = totalLakhs - userBudgetMax;
+            score -= (difference * 15);
+            if (score < -150) score = -150;
+        }
 
+        mathBreakdown = {
+            size: size,
+            rate: Math.round(finalRate),
+            totalLakhs: totalLakhs,
+            mpeb: project.mpeb
+        };
+    } else {
+        mathBreakdown = {
+            totalLakhs: project.flatCost
+        };
+        let userBudgetMax = parseInt(userPreferences.budget);
+        if (userBudgetMax == 60) userBudgetMax = 100;
+        if (project.flatCost > userBudgetMax) {
+            score -= ((project.flatCost - userBudgetMax) * 15);
+        }
+    }
+
+    return { score, mathBreakdown, dynamicInsight };
+}
+
+function submitData() {
+    const fund = document.querySelector('input[name="funding"]:checked');
+    if(!fund) return alert("Please select a funding option");
+    userPreferences.funding = fund.value;
+    
+    document.getElementById("progress").style.width = "100%";
+    
+    // Translation Logic for Google Sheets CRM
+    let translatedPosition = "";
+    if(userPreferences.prop_type === 'plot') {
+        if(userPreferences.plot_pos === 'none') translatedPosition = "Standard Plot";
+        else if(userPreferences.plot_pos === 'both') translatedPosition = "Corner + Garden";
+        else translatedPosition = userPreferences.plot_pos;
+    } else {
+        translatedPosition = userPreferences.family_size;
+    }
+
+    let translatedFunding = userPreferences.funding === 'cash' ? "Full Cash" : "Bank Loan";
+    
+    let translatedBudget = userPreferences.budget;
+    if(translatedBudget === "25") translatedBudget = "25 - 40 Lakhs";
+    if(translatedBudget === "40") translatedBudget = "40 - 60 Lakhs";
+    if(translatedBudget === "60") translatedBudget = "60 Lakhs - 1 Cr+";
+
+    const payload = {
+        name: userPreferences.name,
+        phone: userPreferences.phone,
+        urgency: userPreferences.urgency,
+        purpose: userPreferences.purpose,
+        type: userPreferences.prop_type,
+        position: translatedPosition,
+        budget: translatedBudget,
+        funding: translatedFunding
+    };
+
+    fetch(SHEET_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    }).catch(err => console.log("Silent CRM log triggered"));
+
+    findMatches();
+}
+
+function toggleAccordion(btn) {
+    const content = btn.nextElementSibling;
+    if(content.style.display === "block") {
+        content.style.display = "none";
+        btn.innerHTML = `View Full Estimate & Analysis <span>+</span>`;
+    } else {
+        content.style.display = "block";
+        btn.innerHTML = `Hide Estimate <span>-</span>`;
+    }
+}
+
+function findMatches() {
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("loading").style.display = "flex";
+    
+    // Fade out the logo when loading starts
+    document.getElementById('brand-logo').style.opacity = '0';
+    document.getElementById('brand-logo').style.pointerEvents = 'none';
+
+    let phase = 0;
+    const loadText = document.getElementById("loading-text");
+    const loadInterval = setInterval(() => {
+        loadText.innerText = loadingPhases[phase];
+        phase++;
+        if(phase >= loadingPhases.length) clearInterval(loadInterval);
+    }, 600);
+
+    setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+        const container = document.getElementById("results-container");
+        container.innerHTML = "";
+
+        document.getElementById("res_name").innerText = userPreferences.name.toUpperCase();
+        document.getElementById("res_purpose").innerText = userPreferences.purpose.toUpperCase();
+        document.getElementById("res_type").innerText = userPreferences.prop_type.toUpperCase();
+        document.getElementById("res_budget").innerText = userPreferences.budget == 60 ? "₹60L+" : "₹" + userPreferences.budget + "L";
+        document.getElementById("res_phone").innerText = userPreferences.phone;
+
+        let scoredProjects = projects.map(p => {
+            const res = calculateScore(p);
+            return { ...p, score: res.score, math: res.mathBreakdown, dynamicInsight: res.dynamicInsight };
+        });
+
+        scoredProjects = scoredProjects.filter(p => p.score > -900).sort((a, b) => b.score - a.score).slice(0, 3);
+
+        if (scoredProjects.length === 0) {
+            container.innerHTML = "<p>Please adjust your budget or property type to see matches.</p>";
             document.getElementById("results").style.display = "block";
-            window.scrollTo(0, 0);
+            return;
+        }
 
-        }, 2000); /* 👈 THIS IS THE TIMER LOCK THAT WAS MISSING AND CRASHING THE APP! */
-    }
+        let delayBase = 0;
+        scoredProjects.forEach((match, index) => {
+            let badgeClass = match.score > 80 ? 'match-badge' : 'match-badge good';
+            let badgeText = match.score > 80 ? '98% Match' : '85% Match';
+            if(index === 0 && match.score > 80) badgeText = 'Top Recommendation';
 
-    // -----------------------------------------------------
-    // 5. RESTORE FUNCTION (BRINGS LOGO BACK!)
-    // -----------------------------------------------------
-    function resetApp() {
-        currentStepID = 1;
-        document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-        
-        // Return to first question visually
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById('step-1').classList.add('active');
-        document.getElementById('progress').style.width = '0%';
+            let hiddenMathBreakdown = "";
+            if (match.type === "plot") {
+                hiddenMathBreakdown = `
+                    <div style="background:#f5f5f7; padding:12px; border-radius:8px; margin-bottom:12px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Assumed Size:</span> <strong>${match.math.size} sqft</strong></div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Effective Rate:</span> <strong>₹${match.math.rate}/sqft</strong></div>
+                        <div style="display:flex; justify-content:space-between;"><span>MPEB/Water:</span> <strong>₹${match.math.mpeb}</strong></div>
+                    </div>`;
+            }
 
-        // Hide results, show quiz again
-        document.getElementById("results").style.display = "none";
-        document.getElementById("quiz").style.display = "block";
+            let waMessage = `Hi Ronak, this is ${userPreferences.name}. I am interested in ${match.name}. Please share more details and live inventory.`;
+            let waLink = `https://wa.me/919876543210?text=${encodeURIComponent(waMessage)}`;
+
+            // Elegant native image component inside the card
+            let imageHtml = match.imgUrl ? `
+                <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 12px; margin-bottom: 16px; background: #e5e5ea;">
+                    <img src="${match.imgUrl}" alt="${match.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>` : '';
+
+            container.innerHTML += `
+                <div class="project-card" style="animation-delay: ${delayBase}s">
+                    <div class="card-header">
+                        <h2>${match.name}</h2>
+                        <div class="${badgeClass}">${badgeText}</div>
+                    </div>
+                    
+                    ${imageHtml}
+                    
+                    <h3 class="hero-price">₹${match.math.totalLakhs} Lakhs</h3>
+                    
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Status</span>
+                            <span class="spec-value">${match.status}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">RERA</span>
+                            <span class="spec-value" style="font-size:11px;">${match.rera}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Ideal For</span>
+                            <span class="spec-value">${match.bestFor}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Funding</span>
+                            <span class="spec-value">${userPreferences.funding === 'cash' ? 'Self/Cash' : 'Bank Loan'}</span>
+                        </div>
+                    </div>
+
+                    <a href="${waLink}" target="_blank" class="wa-action" style="margin-bottom: 16px;">
+                        Contact for Details
+                    </a>
+
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        View Full Estimate & Analysis <span>+</span>
+                    </button>
+                    <div class="accordion-content">
+                        ${hiddenMathBreakdown}
+                        <div class="insight-box">
+                            <span class="insight-title" style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 13px; display: block; margin-bottom: 8px;">Consultant's Analysis</span>
+                            ${match.dynamicInsight}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            delayBase += 0.25; 
+        });
+
+        document.getElementById("quiz").style.display = "none";
+        document.getElementById("results").style.display = "block";
         window.scrollTo(0, 0);
-        
-        // 👈 Bring the logo back for a new session
-        document.getElementById('brand-logo').style.opacity = '1';
-        document.getElementById('brand-logo').style.pointerEvents = 'auto';
-    }
+    }, 2000); 
+}
+
+// --- 🪄 RESET APP FUNCTION ---
+function resetApp() {
+    currentStepID = 1;
+    document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+    document.getElementById("q_name").value = "";
+    document.getElementById("q_phone").value = "";
+    renderStep();
+    document.getElementById("results").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    window.scrollTo(0, 0);
+    
+    // Bring the logo back for a new session
+    document.getElementById('brand-logo').style.opacity = '1';
+    document.getElementById('brand-logo').style.pointerEvents = 'auto';
+    
+    // Remove quiz active state to push layout back down 
+    document.body.classList.remove('quiz-active');
+    document.getElementById('brand-logo').classList.remove('quiz-mode');
+    
+    // Restore landing page view
+    const landingPage = document.getElementById('landing-page');
+    landingPage.style.display = 'flex';
+    setTimeout(() => {
+        landingPage.style.opacity = '1';
+    }, 50);
+}
+
+// --- 🪄 LANDING PAGE TRANSITION ANIMATION ---
+function startAssessment() {
+    const landingPage = document.getElementById('landing-page');
+    const logo = document.getElementById('brand-logo');
+    const quizSection = document.getElementById('quiz');
+
+    // 1. Instantly trigger the fluid logo movement
+    logo.classList.add('quiz-mode');
+    document.body.classList.add('quiz-active');
+
+    // 2. Beautifully fade out the entire landing page
+    landingPage.style.opacity = '0';
+    
+    // 3. Reveal the quiz underneath while the landing page melts away
+    quizSection.style.display = 'block';
+    setTimeout(() => {
+        quizSection.style.opacity = '1';
+    }, 50);
+
+    // 4. Once the 0.8-second fade is completely done, destroy the invisible layout so you can click freely
+    setTimeout(() => {
+        landingPage.style.display = 'none';
+    }, 800);
+}
 </script>
 </body>
 </html>
