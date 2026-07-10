@@ -10,22 +10,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
                 /* 💎 SHIVALAY LANDING PAGE STYLES */
-        #landing-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('images/lander.png');
-            background-size: cover;
-            background-position: center;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: background-color 0.8s ease;
-        }
-
+     
         .landing-overlay {
             position: absolute;
             top: 0;
@@ -39,6 +24,44 @@
             transition: opacity 0.8s ease;
         }
 
+        /* 💎 FIXED LOGO FOR SMOOTH ANIMATION */
+        #brand-logo {
+            position: fixed;
+            top: 15vh;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 75px;
+            width: auto;
+            object-fit: contain;
+            z-index: 1001; /* Stays above the landing page forever */
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
+        }
+
+        /* The Magic Logo Transition State */
+        #brand-logo.quiz-mode {
+            top: 16px;
+            height: 45px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05));
+        }
+
+        /* 💎 SHIVALAY LANDING PAGE STYLES */
+        #landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('images/lander.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: opacity 0.8s ease;
+        }
+
         .landing-content {
             position: relative;
             z-index: 2;
@@ -49,16 +72,12 @@
             width: 100%;
             max-width: 500px;
             height: 100%;
-            padding: 12vh 24px 4vh 24px;
+            /* Pushes the text down dynamically to leave room for the floating logo */
+            padding: calc(15vh + 100px) 24px 4vh 24px; 
         }
 
-        #brand-logo {
-            height: 80px;
-            width: auto;
-            object-fit: contain;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
-        }
+        body.quiz-active { padding-top: 80px; }
+        
 
         /* The Magic Logo Transition */
         #brand-logo.quiz-mode {
@@ -427,13 +446,11 @@
     </style>
 </head>
 <body>
+    <img id="brand-logo" src="images/shivalay-logo.png" alt="Shivalay Infratech">
 
-<div class="container">
-    <div id="quiz">
-                    <div id="landing-page">
+    <div id="landing-page">
         <div class="landing-overlay"></div>
         <div class="landing-content">
-            <img id="brand-logo" src="images/shivalay-logo.png" alt="Shivalay Infratech">
             
             <div class="landing-text" id="landing-text">
                 <div class="eyebrow">SHIVALAY INFRATECH PRESENTS</div>
@@ -449,6 +466,7 @@
     </div>
 
     <div class="container" id="quiz" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
+
     
 
 
@@ -1210,42 +1228,32 @@ function findMatches() {
     document.getElementById("results").style.display = "block";
     window.scrollTo(0, 0);
 }
-
 // --- 🪄 LANDING PAGE TRANSITION ANIMATION ---
 function startAssessment() {
     const landingPage = document.getElementById('landing-page');
-    const landingText = document.getElementById('landing-text');
-    const landingAction = document.getElementById('landing-action');
-    const overlay = document.querySelector('.landing-overlay');
     const logo = document.getElementById('brand-logo');
     const quizSection = document.getElementById('quiz');
 
-    // 1. Dissolve the text, button, and glass overlay smoothly
-    landingText.style.opacity = '0';
-    landingAction.style.opacity = '0';
-    overlay.style.opacity = '0';
-    
-    // 2. Wait for the fade out, then transition the layout
-    setTimeout(() => {
-        // Shift logo to fixed position at the top
-        logo.classList.add('quiz-mode');
-        document.body.classList.add('quiz-active');
-        
-        // Move logo to the main body, then completely destroy the landing page to prevent invisible blocking
-        document.body.appendChild(logo);
-        landingPage.style.display = 'none';
-        
-        // 3. Elegantly fade in the actual quiz
-        quizSection.style.display = 'block';
-        
-        // Slight delay to allow the browser to register the display change before fading in
-        setTimeout(() => {
-            quizSection.style.opacity = '1';
-        }, 50);
-        
-    }, 500);
-}
+    // 1. Instantly trigger the fluid logo movement
+    logo.classList.add('quiz-mode');
+    document.body.classList.add('quiz-active');
 
+    // 2. Beautifully fade out the entire landing page
+    landingPage.style.opacity = '0';
+    
+    // 3. Reveal the quiz underneath while the landing page melts away
+    quizSection.style.display = 'block';
+    setTimeout(() => {
+        quizSection.style.opacity = '1';
+    }, 50);
+
+    // 4. Once the 0.8-second fade is completely done, destroy the invisible layout so you can click freely
+    setTimeout(() => {
+        landingPage.style.display = 'none';
+    }, 800);
+}
+    
+ 
 </script>
 </body>
 </html>
