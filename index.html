@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <title>Shivalay Infratech | Premium Real Estate Matchmaker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shivalay Infratech | Premium Real Estate Matchmaker</title>
     <meta name="description" content="Hum bharose ko pyaar se bunte hain, tabhi log humein chunte hain. Take our personalized assessment to find your ideal property along the Indore-Ujjain corridor.">
 
     <style>
@@ -1210,15 +1211,7 @@ function findMatches() {
     window.scrollTo(0, 0);
 }
 
-function resetApp() {
-    currentStepID = 1;
-    document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-    renderStep();
-    document.getElementById("results").style.display = "none";
-    document.getElementById("quiz").style.display = "block";
-    window.scrollTo(0, 0);
-}
-    // --- 🪄 LANDING PAGE TRANSITION ANIMATION ---
+// --- 🪄 LANDING PAGE TRANSITION ANIMATION ---
 function startAssessment() {
     const landingPage = document.getElementById('landing-page');
     const landingText = document.getElementById('landing-text');
@@ -1232,23 +1225,27 @@ function startAssessment() {
     landingAction.style.opacity = '0';
     overlay.style.opacity = '0';
     
-    // 2. Strip the background image seamlessly
+    // 2. Wait for the fade out, then transition the layout
     setTimeout(() => {
-        landingPage.style.backgroundImage = 'none';
-        landingPage.style.backgroundColor = 'transparent';
-    }, 400);
+        // Shift logo to fixed position at the top
+        logo.classList.add('quiz-mode');
+        document.body.classList.add('quiz-active');
+        
+        // Move logo to the main body, then completely destroy the landing page to prevent invisible blocking
+        document.body.appendChild(logo);
+        landingPage.style.display = 'none';
+        
+        // 3. Elegantly fade in the actual quiz
+        quizSection.style.display = 'block';
+        
+        // Slight delay to allow the browser to register the display change before fading in
+        setTimeout(() => {
+            quizSection.style.opacity = '1';
+        }, 50);
+        
+    }, 500);
+}
 
-    // 3. Trigger the magic logo movement to the top & push the body down
-    logo.classList.add('quiz-mode');
-    document.body.classList.add('quiz-active');
-
-    // 4. Elegantly fade in the actual quiz underneath
-    quizSection.style.display = 'block';
-    setTimeout(() => {
-        quizSection.style.opacity = '1';
-        landingPage.style.pointerEvents = 'none'; // Lets clicks pass through to the quiz
-    }, 400);
-    }
 </script>
 </body>
 </html>
